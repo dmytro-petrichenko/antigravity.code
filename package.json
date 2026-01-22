@@ -1,0 +1,17 @@
+{
+    "name": "antigravity-code",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "vitest"
+    },
+    "dependencies": {
+        "three": "^0.160.0"
+    },
+    "devDependencies": {
+        "@types/three": "^0.160.0",
+        "typescript": "^5.3.3",
+        "vite": "^6.4.1",
+        "vitest": "^1.2.1"
+    }
+}
