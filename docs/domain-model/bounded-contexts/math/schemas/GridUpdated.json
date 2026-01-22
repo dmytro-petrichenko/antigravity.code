@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "GridUpdated",
+    "description": "Emitted when the calculation of the coordinate grid is complete.",
+    "type": "object",
+    "properties": {
+        "points": {
+            "type": "object",
+            "description": "A flat Float32Array buffer containing [x1, y1, z1, x2, y2, z2...]. Represented here as metadata since binary data is not JSON serializable directly in the event body if using Transferables.",
+            "properties": {
+                "byteLength": {
+                    "type": "integer"
+                },
+                "pointCount": {
+                    "type": "integer"
+                }
+            }
+        },
+        "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of calculation completion"
+        }
+    },
+    "required": [
+        "points",
+        "timestamp"
+    ]
+}

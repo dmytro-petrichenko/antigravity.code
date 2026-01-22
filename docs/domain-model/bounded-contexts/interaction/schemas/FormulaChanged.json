@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FormulaChanged",
+    "description": "Command to update the algebraic formula used for calculation.",
+    "type": "object",
+    "properties": {
+        "expression": {
+            "type": "string",
+            "description": "The mathematical expression (e.g., 'z = x * y')"
+        }
+    },
+    "required": [
+        "expression"
+    ]
+}

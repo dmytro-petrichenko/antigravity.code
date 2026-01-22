@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ScaleChanged",
+    "description": "Event triggered when the user changes the coordinate scale.",
+    "type": "object",
+    "properties": {
+        "factor": {
+            "type": "number",
+            "description": "The multiplier to apply to the current scale. >1 zooms in/increases range, <1 zooms out."
+        }
+    },
+    "required": [
+        "factor"
+    ]
+}
