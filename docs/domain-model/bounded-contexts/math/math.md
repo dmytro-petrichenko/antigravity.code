@@ -8,9 +8,10 @@ The **Math Context** is the computational core of the application. It is respons
 *   **Formula**: An algebraic expression defining the relationship between $x$ and $y$. Currently limited to operations `*` (multiplication), `/` (division), and constant scalars.
     *   *Example*: `z = x * y`, `z = x * x`
 *   **Coordinate Space**: The abstract mathematical bounds of the calculation.
-    *   **Range**: The min/max values for axes (initially fixed, e.g., -10 to +10).
+    *   **Range**: The min/max values for axes. ZOOM IN reduces the **Domain Range** (smaller slice of math space) but SCALES UP the **Points** to fill the same visual bounds. Initial: -10 to +10.
     *   **Step**: The resolution or density of the grid.
 *   **Grid**: A collection of calculated **Points** representing the surface $z = f(x, y)$.
+    *   **Note**: Coordinates are **Normalized View Space**. They are pre-scaled by the Zoom Factor to ensure the visual grid size remains constant while the domain coverage changes.
 *   **Point**: A tuple $(x, y, z)$ in 3D space.
 
 ## Responsibilities

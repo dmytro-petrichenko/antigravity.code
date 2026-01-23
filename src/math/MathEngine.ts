@@ -15,6 +15,9 @@ export class MathEngine {
         step: 1
     };
 
+    private currentZoom: number = 1.0;
+    private readonly baseRange: number = 10;
+
     constructor() {
         this.parser = new ExpressionParser();
     }
@@ -24,15 +27,11 @@ export class MathEngine {
     }
 
     updateScale(scale: number): void {
-        // Assuming scale affects the range size, keeping it centered? 
-        // Or simply acting as a "zoom" factor?
-        // documentation says: "Range: The min/max values for axes (initially fixed, e.g., -10 to +10)."
-        // "Regenerate the Grid when the Scale (Range) changes."
-        // "ScaleChanged(factor: number)"
+        // scale is a multiplication factor from the UI (e.g. 1.1 or 0.9)
+        this.currentZoom *= scale;
 
-        // Let's interpret scale factor as multiplying the default range.
-        const base = 10;
-        const newMax = base * scale;
+        // Zoom In (Higher Zoom) -> Smaller Range
+        const newMax = this.baseRange / this.currentZoom;
         const newMin = -newMax;
 
         this.space.xRange = { min: newMin, max: newMax };
@@ -65,9 +64,10 @@ export class MathEngine {
 
                 const z = this.parser.evaluate(this.currentExpressionNode, x, y);
 
-                points[ptr++] = x;
-                points[ptr++] = y;
-                points[ptr++] = z;
+                // Scale spatial coordinates to normalize visual size
+                points[ptr++] = x * this.currentZoom;
+                points[ptr++] = y * this.currentZoom;
+                points[ptr++] = z * this.currentZoom;
             }
         }
 

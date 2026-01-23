@@ -73,7 +73,7 @@ interaction.subscribe((event) => {
 // Initial kick-off
 mathWorker.postMessage({
     type: 'UPDATE_FORMULA',
-    payload: { expression: 'z = Math.sin(x) * Math.cos(y)' }
+    payload: { expression: 'z = x * y' }
 });
 
 console.log('Application Initialized');
