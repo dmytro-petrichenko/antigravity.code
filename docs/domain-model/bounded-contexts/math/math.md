@@ -14,6 +14,7 @@ The **Math Context** is the computational core of the application. It is respons
     *   **Step**: Dynamic. Calculated as `Range / Resolution`. Ensures typically constant point density visually.
 *   **Grid**: A collection of calculated **Points** representing the surface $z = f(x, y)$.
     *   **Note**: Coordinates are **Normalized View Space**. They are pre-scaled by the Zoom Factor to ensure the visual grid size remains constant while the domain coverage changes.
+    *   **Clipping**: Points outside the visual bounding box (-10 to 10 on any axis) are discarded to ensure the graph remains within the Scene's display limits.
 *   **Point**: A tuple $(x, y, z)$ in 3D space.
 
 ## Responsibilities

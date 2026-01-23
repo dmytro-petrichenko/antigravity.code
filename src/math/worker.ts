@@ -1,12 +1,13 @@
 import { MathEngine } from './MathEngine';
-import { FormulaChanged, ScaleChanged } from './types';
+import { FormulaChanged, ScaleChanged, SamplingContextUpdated } from './types';
 
 // Define Worker Message Types locally or import if shared effectively
 // For simplicity, defining structure here matching checks
 type WorkerMessage =
     | { type: 'INIT' }
     | { type: 'UPDATE_FORMULA'; payload: FormulaChanged }
-    | { type: 'UPDATE_SCALE'; payload: ScaleChanged };
+    | { type: 'UPDATE_SCALE'; payload: ScaleChanged }
+    | { type: 'SAMPLING_CONTEXT_UPDATED'; payload: SamplingContextUpdated };
 
 const engine = new MathEngine();
 
@@ -24,6 +25,10 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
             break;
         case 'UPDATE_SCALE':
             engine.updateScale((event.data as any).payload.factor);
+            broadcastGrid();
+            break;
+        case 'SAMPLING_CONTEXT_UPDATED':
+            engine.updateSamplingContext((event.data as any).payload);
             broadcastGrid();
             break;
     }

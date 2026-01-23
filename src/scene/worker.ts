@@ -9,6 +9,12 @@ self.onmessage = (event: MessageEvent<WorkerMessage>) => {
     switch (type) {
         case 'INIT':
             engine = new SceneEngine(payload);
+            engine.onContextUpdate = (context) => {
+                self.postMessage({
+                    type: 'SAMPLING_CONTEXT_UPDATED',
+                    payload: context
+                });
+            };
             break;
         case 'UPDATE_GRID':
             engine?.updateGrid(payload);

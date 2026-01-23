@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { SceneOptions, GridData } from './types';
+import { SceneOptions, GridData, SamplingContextUpdated } from './types';
 
 export class SceneEngine {
     private scene: THREE.Scene;
@@ -7,6 +7,9 @@ export class SceneEngine {
     private renderer: THREE.WebGLRenderer;
     private mesh: THREE.Mesh | null = null;
     private isRendering = false;
+
+    public onContextUpdate: ((context: SamplingContextUpdated) => void) | null = null;
+    private lastContextTimestamp = 0;
 
     constructor(options: SceneOptions) {
         const { canvas, width, height, pixelRatio } = options;
@@ -37,8 +40,70 @@ export class SceneEngine {
         directionalLight.position.set(1, 1, 1);
         this.scene.add(directionalLight);
 
+        // Emit initial context
+        // Defer slightly to ensure listeners are attached if needed, or just emit.
+        // Since constructor is sync, caller needs to attach callback after instance creation.
+        // We can emit in 'start' or explicit init.
+
         // Start render loop
         this.start();
+        setTimeout(() => this.emitContext(), 0);
+    }
+
+    private emitContext() {
+        if (this.onContextUpdate) {
+            const context = this.getSamplingContext();
+            this.onContextUpdate(context);
+        }
+    }
+
+    private getSamplingContext(): SamplingContextUpdated {
+        this.camera.updateMatrixWorld();
+        this.camera.updateProjectionMatrix();
+
+        const projectionMatrix = this.camera.projectionMatrix.clone();
+        const viewMatrix = this.camera.matrixWorldInverse.clone();
+
+        // View-Projection Matrix = Projection * View
+        const vpMatrix = projectionMatrix.multiply(viewMatrix);
+
+        // Tolerance: roughly 1.0 screen units? 
+        // 1.0 might be too loose or tight depending on coordinate system.
+        // In normalized device coordinates (NDC), range is -1 to 1.
+        // Screen space usually refers to pixels? 
+        // The project method in math returns screen coords.
+        // Let's assume math project returns NDC (-1 to 1) if we just use VP matrix.
+        // AND we want error in PIXELS.
+
+        // Wait, three.js projection matrix transforms to Clip Coordinates (Homogeneous).
+        // Division by w gives NDC (-1 to 1).
+        // To get pixels, we multiply by half width/height.
+
+        // The MathEngine project function I wrote:
+        // screenX = (m[0]*x + ...)/w
+        // This is X_NDC.
+
+        // So the distance in MathEngine is distance in NDC.
+        // 1 pixel in NDC is roughly 2.0 / height.
+
+        // If we want sub-pixel accuracy (e.g. 0.5 pixel error), 
+        // tolerance should be (1.0 / height) * 0.5 approx?
+        // Let's pick a conservative tolerance in NDC.
+        // e.g. 0.005
+
+        const tolerance = 0.01; // Tunable
+
+        return {
+            projection: {
+                type: 'LinearMatrix',
+                matrix: new Float32Array(vpMatrix.elements)
+            },
+            tolerance: tolerance,
+            limits: {
+                maxDepth: 8,
+                minStep: 0.01 // Minimal world space step
+            }
+        };
     }
 
     public updateGrid(data: GridData) {
@@ -50,38 +115,11 @@ export class SceneEngine {
         }
 
         const vertexCount = data.length / 3;
-        const gridSize = Math.sqrt(vertexCount);
 
-        // Validate if it's a square grid
-        if (!Number.isInteger(gridSize)) {
-            console.warn('Grid data does not represent a square grid. Rendering points instead.');
-            // Fallback to points
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(data, 3));
-            const material = new THREE.PointsMaterial({ color: 0x00ff00, size: 0.1 });
-            this.mesh = new THREE.Points(geometry, material) as unknown as THREE.Mesh;
-            this.scene.add(this.mesh);
-            return;
-        }
-
+        // Adaptive data (Triangle Soup)
+        // Render as Mesh without indices (Soup)
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute('position', new THREE.BufferAttribute(data, 3));
-
-        // Generate indices for a grid
-        const indices: number[] = [];
-        for (let z = 0; z < gridSize - 1; z++) {
-            for (let x = 0; x < gridSize - 1; x++) {
-                const a = z * gridSize + x;
-                const b = z * gridSize + x + 1;
-                const c = (z + 1) * gridSize + x;
-                const d = (z + 1) * gridSize + x + 1;
-
-                // Two triangles per quad
-                indices.push(a, b, d);
-                indices.push(a, d, c);
-            }
-        }
-        geometry.setIndex(indices);
         geometry.computeVertexNormals();
 
         const material = new THREE.MeshBasicMaterial({
@@ -115,12 +153,15 @@ export class SceneEngine {
 
         this.camera.position.copy(offset);
         this.camera.lookAt(0, 0, 0);
+
+        this.emitContext();
     }
 
     public resize(width: number, height: number) {
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(width, height, false);
+        this.emitContext();
     }
 
     private start() {

@@ -45,6 +45,11 @@ mathWorker.onmessage = (event) => {
             type: 'UPDATE_GRID',
             payload: payload.points
         }, [payload.points.buffer]);
+    } else if (type === 'SAMPLING_CONTEXT_UPDATED') {
+        mathWorker.postMessage({
+            type: 'SAMPLING_CONTEXT_UPDATED',
+            payload: payload
+        });
     }
 };
 
