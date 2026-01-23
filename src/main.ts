@@ -7,6 +7,9 @@ const interaction = new InteractionContext('controls-container');
 // Initialize Scene Worker
 const sceneWorker = new Worker(new URL('./scene/worker.ts', import.meta.url), { type: 'module' });
 
+// Initialize Math Worker
+const mathWorker = new Worker(new URL('./math/worker.ts', import.meta.url), { type: 'module' });
+
 // Canvas Setup
 const canvas = document.getElementById('scene-canvas') as HTMLCanvasElement;
 if (canvas) {
@@ -34,6 +37,17 @@ if (canvas) {
     });
 }
 
+// Coordinate Workers
+mathWorker.onmessage = (event) => {
+    const { type, payload } = event.data;
+    if (type === 'GRID_UPDATED') {
+        sceneWorker.postMessage({
+            type: 'UPDATE_GRID',
+            payload: payload.points
+        }, [payload.points.buffer]);
+    }
+};
+
 // Orchestration
 interaction.subscribe((event) => {
     if (event instanceof ViewRotated) {
@@ -43,11 +57,23 @@ interaction.subscribe((event) => {
         });
     } else if (event instanceof FormulaChanged) {
         console.log('Formula updated:', event.expression);
-        // TODO: Send to Math Worker, then result to Scene Worker
+        mathWorker.postMessage({
+            type: 'UPDATE_FORMULA',
+            payload: { expression: event.expression }
+        });
     } else if (event instanceof ScaleChanged) {
         console.log('Scale changed:', event.factor);
-        // TODO: Adjust Scene scale
+        mathWorker.postMessage({
+            type: 'UPDATE_SCALE',
+            payload: { factor: event.factor }
+        });
     }
+});
+
+// Initial kick-off
+mathWorker.postMessage({
+    type: 'UPDATE_FORMULA',
+    payload: { expression: 'z = Math.sin(x) * Math.cos(y)' }
 });
 
 console.log('Application Initialized');

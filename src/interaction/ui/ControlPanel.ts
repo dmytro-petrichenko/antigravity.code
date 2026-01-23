@@ -64,7 +64,7 @@ export class ControlPanel {
 
         // Mouse drag on container for rotation. 
         // We listen on container for mousedown, but window for move/up to handle drag outside
-        this.container.addEventListener('mousedown', this.onMouseDown);
+        document.body.addEventListener('mousedown', this.onMouseDown);
         window.addEventListener('mouseup', this.onMouseUp);
         window.addEventListener('mousemove', this.onMouseMove);
     }
@@ -97,7 +97,7 @@ export class ControlPanel {
     }
 
     public destroy(): void {
-        this.container.removeEventListener('mousedown', this.onMouseDown);
+        document.body.removeEventListener('mousedown', this.onMouseDown);
         window.removeEventListener('mouseup', this.onMouseUp);
         window.removeEventListener('mousemove', this.onMouseMove);
 
