@@ -17,6 +17,7 @@ export class MathEngine {
 
     private currentZoom: number = 1.0;
     private readonly baseRange: number = 10;
+    private readonly RESOLUTION: number = 20;
 
     constructor() {
         this.parser = new ExpressionParser();
@@ -49,7 +50,12 @@ export class MathEngine {
             return new Float32Array(0);
         }
 
-        const { xRange, yRange, step } = this.space;
+        const { xRange, yRange } = this.space;
+
+        // Calculate step dynamically based on fixed resolution
+        const rangeWidth = xRange.max - xRange.min;
+        const step = rangeWidth / this.RESOLUTION;
+
         const xSteps = Math.floor((xRange.max - xRange.min) / step) + 1;
         const ySteps = Math.floor((yRange.max - yRange.min) / step) + 1;
 

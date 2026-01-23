@@ -15,13 +15,19 @@ export class SceneEngine {
         this.scene.background = new THREE.Color(0x1a1a1a);
 
         this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        this.camera.position.z = 5;
+        this.camera.position.z = 30;
 
         // We cast canvas to any because Three.js types might not strictly align with OffscreenCanvas without specific overrides,
         // although it usually supports it.
         this.renderer = new THREE.WebGLRenderer({ canvas: canvas as unknown as HTMLCanvasElement, antialias: true });
         this.renderer.setPixelRatio(pixelRatio);
         this.renderer.setSize(width, height, false);
+
+        // Add Bounding Cube (20x20x20)
+        const boxGeo = new THREE.BoxGeometry(20, 20, 20);
+        const edges = new THREE.EdgesGeometry(boxGeo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x0000ff }));
+        this.scene.add(line);
 
         // Initial basic lighting
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
