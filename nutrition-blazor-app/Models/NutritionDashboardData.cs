@@ -9,13 +9,25 @@ public sealed record NutritionDashboardData(
 public sealed record MacroSection(
     string Title,
     string TotalAmount,
-    IReadOnlyList<NutrientSegment> Segments);
+    IReadOnlyList<NutrientSegment> Segments)
+{
+    public string Header => $"{Title} - {TotalAmount}";
+}
 
 public sealed record NutrientSegment(
     string Label,
     string Amount,
     double Percentage,
-    string ColorKey);
+    NutrientColor Color,
+    bool ShowInLegend = true);
+
+public enum NutrientColor
+{
+    Green,
+    Blue,
+    Gray,
+    Beige
+}
 
 public sealed record FlavorSlice(
     string Label,

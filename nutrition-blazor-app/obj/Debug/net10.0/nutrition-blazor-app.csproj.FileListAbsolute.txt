@@ -217,9 +217,6 @@
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_EFIGS.tptq2av103.dat
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.k7v3cyvnk0.wasm
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.uovcwb0bhq.pdb
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/dotnet.n5eb6vpjht.js
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/blazor.webassembly.66stpp682q.js.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/Microsoft.AspNetCore.Authorization.f7yamg8acn.wasm.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/Microsoft.AspNetCore.Components.i180xx2qq9.wasm.gz
@@ -428,9 +425,6 @@
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_EFIGS.tptq2av103.dat.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.k7v3cyvnk0.wasm.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.uovcwb0bhq.pdb.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/dotnet.n5eb6vpjht.js.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/nutrition-blazor-app.staticwebassets.runtime.json
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/nutrition-blazor-app.staticwebassets.endpoints.json
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/nutrition-blazor-app.dll
@@ -901,8 +895,6 @@
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/6cadggk6kj-{0}-63fj8s7r0e-63fj8s7r0e.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/hvg9e21frv-{0}-5hs7f62bpn-5hs7f62bpn.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/w8cuc3so7l-{0}-66stpp682q-66stpp682q.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/9te9xlfsqq-{0}-zcljqwtoy0-zcljqwtoy0.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/35meyz809f-{0}-zcljqwtoy0-zcljqwtoy0.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/0jzkh1vmy3-{0}-f7yamg8acn-f7yamg8acn.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/bnv3gqipi6-{0}-i180xx2qq9-i180xx2qq9.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/xsea6xcjub-{0}-au92kshad9-au92kshad9.gz
@@ -1110,10 +1102,6 @@
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/8l6eo7169i-{0}-tjcz0u77k5-tjcz0u77k5.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/nhuvorlzzo-{0}-tptq2av103-tptq2av103.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/fiyb2z4u3s-{0}-lfu7j35m59-lfu7j35m59.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/xvtrmtbjvv-{0}-k7v3cyvnk0-k7v3cyvnk0.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/cffd8xeybm-{0}-uovcwb0bhq-uovcwb0bhq.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/mx2p379yt8-{0}-n5eb6vpjht-n5eb6vpjht.gz
-/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/zxxxu2f9b5-{0}-4ixh48vozj-4ixh48vozj.gz
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/staticwebassets.build.json
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/staticwebassets.build.json.cache
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/staticwebassets.development.json
@@ -1124,3 +1112,16 @@
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/refint/nutrition-blazor-app.dll
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/nutrition-blazor-app.pdb
 /Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/ref/nutrition-blazor-app.dll
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/scopedcss/Components/MacroBarWidget.razor.rz.scp.css
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/9te9xlfsqq-{0}-giizgd870c-giizgd870c.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/35meyz809f-{0}-giizgd870c-giizgd870c.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.744p8xhxd4.wasm
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.vudp7abx02.pdb
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/dotnet.kf6cmd8t2u.js
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.744p8xhxd4.wasm.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/nutrition-blazor-app.vudp7abx02.pdb.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/bin/Debug/net10.0/wwwroot/_framework/dotnet.kf6cmd8t2u.js.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/xvtrmtbjvv-{0}-744p8xhxd4-744p8xhxd4.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/cffd8xeybm-{0}-vudp7abx02-vudp7abx02.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/mx2p379yt8-{0}-kf6cmd8t2u-kf6cmd8t2u.gz
+/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/obj/Debug/net10.0/compressed/zxxxu2f9b5-{0}-idhxgwt8x0-idhxgwt8x0.gz

@@ -1,0 +1,93 @@
+.macro-widget h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 1.8rem + 0.35vw, 2.35rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.stacked-bar {
+    display: flex;
+    width: 100%;
+    height: 3.25rem;
+    border-radius: var(--radius-bar);
+    overflow: hidden;
+    background: var(--gray);
+}
+
+.bar-segment {
+    flex: 0 0 auto;
+    border-right: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.bar-segment:last-child {
+    border-right: 0;
+}
+
+.segment-green {
+    background: var(--green);
+}
+
+.segment-blue {
+    background: var(--blue);
+}
+
+.segment-gray {
+    background: var(--gray);
+}
+
+.segment-beige {
+    background: var(--beige);
+}
+
+.legend-list {
+    list-style: none;
+    margin: 1.35rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 2rem;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    color: var(--text-muted);
+    font-size: clamp(1.55rem, 1.35rem + 0.1vw, 1.8rem);
+    line-height: 1.25;
+    max-width: 22rem;
+}
+
+.legend-swatch {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 0.28rem;
+    margin-top: 0.08rem;
+    flex-shrink: 0;
+}
+
+.swatch-green {
+    background: var(--green);
+}
+
+.swatch-blue {
+    background: var(--blue);
+}
+
+.swatch-gray {
+    background: var(--gray);
+}
+
+.swatch-beige {
+    background: var(--beige);
+}
+
+@media (max-width: 40rem) {
+    .stacked-bar {
+        height: 2.65rem;
+    }
+
+    .legend-item {
+        font-size: 1.25rem;
+    }
+}

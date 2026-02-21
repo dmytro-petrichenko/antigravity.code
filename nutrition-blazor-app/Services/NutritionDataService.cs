@@ -17,26 +17,26 @@ public sealed class MockNutritionDataService : INutritionDataService
                 TotalAmount: "50g",
                 Segments:
                 [
-                    new NutrientSegment("Sugars", "35g", 30, "green"),
-                    new NutrientSegment("Starch", "10g", 37, "blue"),
-                    new NutrientSegment("Fiber", "5g", 33, "gray")
+                    new NutrientSegment("Sugars", "35g", 30, NutrientColor.Green),
+                    new NutrientSegment("Starch", "10g", 40, NutrientColor.Blue),
+                    new NutrientSegment("Fiber", "5g", 30, NutrientColor.Gray)
                 ]),
             new MacroSection(
                 Title: "Proteins",
                 TotalAmount: "10g",
                 Segments:
                 [
-                    new NutrientSegment("Amino Acid Profile (EAAs)", "35g", 62, "beige"),
-                    new NutrientSegment("Remaining", "15g", 38, "gray")
+                    new NutrientSegment("Amino Acid Profile (EAAs)", "35g", 70, NutrientColor.Beige),
+                    new NutrientSegment("Remaining", "15g", 30, NutrientColor.Gray, ShowInLegend: false)
                 ]),
             new MacroSection(
                 Title: "Fats",
                 TotalAmount: "20g",
                 Segments:
                 [
-                    new NutrientSegment("Saturated", "5g", 33, "green"),
-                    new NutrientSegment("Monounsaturated", "10g", 30, "blue"),
-                    new NutrientSegment("Polyunsaturated", "5g", 37, "gray")
+                    new NutrientSegment("Saturated", "5g", 33, NutrientColor.Green),
+                    new NutrientSegment("Monounsaturated", "10g", 30, NutrientColor.Blue),
+                    new NutrientSegment("Polyunsaturated", "5g", 37, NutrientColor.Gray)
                 ])
         ],
         FlavorSlices:

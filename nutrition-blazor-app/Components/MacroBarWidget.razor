@@ -1,0 +1,44 @@
+<article class="macro-widget">
+    <h2>@HeaderText</h2>
+
+    <div class="stacked-bar" role="img" aria-label="@BuildAriaLabel()">
+        @foreach (var item in Sections)
+        {
+            <span class="bar-segment @MacroBarWidgetLogic.GetSegmentCssClass(item.Color)"
+                  style="@MacroBarWidgetLogic.GetWidthStyle(item.Percentage)"></span>
+        }
+    </div>
+
+    <ul class="legend-list">
+        @foreach (var item in Sections.Where(entry => entry.ShowInLegend))
+        {
+            <li class="legend-item">
+                <span class="legend-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
+                      aria-hidden="true"></span>
+                <span>@item.Label - @item.Amount</span>
+            </li>
+        }
+    </ul>
+</article>
+
+@code {
+    [Parameter, EditorRequired]
+    public string HeaderText { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public IReadOnlyList<NutrientSegment> Sections { get; set; } = [];
+
+    protected override void OnParametersSet()
+    {
+        MacroBarWidgetLogic.ValidateSections(Sections);
+    }
+
+    private string BuildAriaLabel()
+    {
+        var parts = Sections
+            .Where(item => item.ShowInLegend)
+            .Select(item => $"{item.Label} {item.Amount}");
+
+        return $"{HeaderText}: {string.Join(", ", parts)}";
+    }
+}

@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Components/MacroBarWidget.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYWNyb0JhcldpZGdldC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gs24lyyzlc
+
 [/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-pwwtl9tkx2
