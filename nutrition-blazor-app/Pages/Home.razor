@@ -1,0 +1,131 @@
+﻿@page "/"
+@inject INutritionDataService NutritionDataService
+
+<PageTitle>Nutrition Dashboard</PageTitle>
+
+<main class="dashboard" aria-label="Nutrition dashboard">
+    <h1 class="sr-only">Nutrition dashboard</h1>
+
+    <section class="panel nutrition-panel" aria-label="Macronutrients">
+        @foreach (var macroSection in Dashboard.MacroSections)
+        {
+            <article class="nutrient-block">
+                <h2>@macroSection.Title - @macroSection.TotalAmount</h2>
+                <div class="stacked-bar" role="img" aria-label="@BuildMacroAriaLabel(macroSection)">
+                    @foreach (var segment in macroSection.Segments)
+                    {
+                        <span class="bar-segment @GetMacroSegmentClass(segment.ColorKey)" style="@GetWidthStyle(segment.Percentage)"></span>
+                    }
+                </div>
+                <ul class="legend-list">
+                    @foreach (var segment in macroSection.Segments.Where(s => s.Label != "Remaining"))
+                    {
+                        <li class="legend-item">
+                            <span class="legend-swatch @GetLegendSwatchClass(segment.ColorKey)" aria-hidden="true"></span>
+                            <span>@segment.Label - @segment.Amount</span>
+                        </li>
+                    }
+                </ul>
+            </article>
+        }
+    </section>
+
+    <section class="panel flavor-panel" aria-label="Flavor split">
+        <figure class="donut-chart" role="img" aria-label="@BuildFlavorAriaLabel()" style="@GetFlavorGradientStyle()">
+            @foreach (var slice in Dashboard.FlavorSlices)
+            {
+                <figcaption class="slice-label @GetFlavorPositionClass(slice.PositionKey) @GetFlavorTextClass(slice.ColorKey)">
+                    @slice.Label<br /><span>@slice.Percentage%</span>
+                </figcaption>
+            }
+        </figure>
+    </section>
+
+    <div class="dashboard-divider" aria-hidden="true"></div>
+
+    <div class="micronutrient-row">
+        <section class="panel micronutrient-panel" aria-label="Vitamins">
+            @foreach (var vitamin in Dashboard.Vitamins)
+            {
+                <article class="micro-item">
+                    <h2 class="micro-name">@vitamin.Name</h2>
+                    <p class="micro-meta">@vitamin.Details</p>
+                    <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(vitamin)">
+                        <span class="micro-fill" style="@GetWidthStyle(vitamin.Percentage)"></span>
+                        <span class="micro-rest"></span>
+                    </div>
+                </article>
+            }
+        </section>
+
+        <section class="panel micronutrient-panel" aria-label="Minerals">
+            @foreach (var mineral in Dashboard.Minerals)
+            {
+                <article class="micro-item">
+                    <h2 class="micro-name">@mineral.Name</h2>
+                    <p class="micro-meta">@mineral.Details</p>
+                    <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(mineral)">
+                        <span class="micro-fill" style="@GetWidthStyle(mineral.Percentage)"></span>
+                        <span class="micro-rest"></span>
+                    </div>
+                </article>
+            }
+        </section>
+    </div>
+</main>
+
+@code {
+    private NutritionDashboardData Dashboard = default!;
+
+    protected override void OnInitialized()
+    {
+        Dashboard = NutritionDataService.GetDashboard();
+    }
+
+    private static string GetWidthStyle(double percentage) => $"width: {percentage:0.##}%;";
+
+    private static string GetMacroSegmentClass(string colorKey) => $"segment-{colorKey}";
+
+    private static string GetLegendSwatchClass(string colorKey) => $"swatch-{colorKey}";
+
+    private static string GetFlavorPositionClass(string positionKey) => $"label-{positionKey}";
+
+    private static string GetFlavorTextClass(string colorKey) => colorKey == "blue" ? "slice-light-text" : string.Empty;
+
+    private string GetFlavorGradientStyle()
+    {
+        var offset = 0;
+        var stops = Dashboard.FlavorSlices.Select(slice =>
+        {
+            var start = offset;
+            offset += slice.Percentage;
+            return $"var({GetFlavorCssVariable(slice.ColorKey)}) {start}% {offset}%";
+        });
+
+        return $"background: conic-gradient({string.Join(", ", stops)});";
+    }
+
+    private static string GetFlavorCssVariable(string colorKey) => colorKey switch
+    {
+        "light" => "--chart-light",
+        _ => $"--{colorKey}"
+    };
+
+    private string BuildMacroAriaLabel(MacroSection section)
+    {
+        var parts = section.Segments
+            .Where(segment => segment.Label != "Remaining")
+            .Select(segment => $"{segment.Label} {segment.Amount}");
+
+        return $"{section.Title}: {string.Join(", ", parts)}";
+    }
+
+    private string BuildFlavorAriaLabel()
+    {
+        var parts = Dashboard.FlavorSlices.Select(slice => $"{slice.Label} {slice.Percentage} percent");
+        return $"Flavor distribution: {string.Join(", ", parts)}";
+    }
+
+    private static string BuildMicroAriaLabel(MicronutrientItem item)
+        => $"{item.Name}: {item.Details}";
+}
