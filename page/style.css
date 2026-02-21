@@ -1,0 +1,363 @@
+:root {
+  --page-bg: #ececf1;
+  --panel-bg: #f3f3f6;
+  --text-main: #3f444f;
+  --text-muted: #535863;
+  --rule: #e1e1e6;
+  --shadow: 0 20px 40px rgba(43, 48, 58, 0.04);
+  --radius-panel: 1.85rem;
+  --radius-bar: 0.45rem;
+  --green: #97b690;
+  --blue: #8399ca;
+  --gray: #cbccd2;
+  --beige: #b6a48f;
+  --lavender: #bcc1d2;
+  --chart-light: #e3e3e5;
+  --bar-track: #efeff2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  padding: 2.4rem;
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+.dashboard {
+  width: min(96rem, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  gap: 2rem;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow);
+}
+
+.dashboard-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--rule);
+  margin: 0.15rem 0 0.25rem;
+}
+
+.nutrition-panel {
+  padding: 2.6rem 2.7rem;
+}
+
+.nutrient-block + .nutrient-block {
+  margin-top: 2.2rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.nutrient-block h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 1.8rem + 0.35vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.stacked-bar {
+  display: flex;
+  width: 100%;
+  height: 3.25rem;
+  border-radius: var(--radius-bar);
+  overflow: hidden;
+}
+
+.bar-segment {
+  flex: 0 0 auto;
+  border-right: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.bar-segment:last-child {
+  border-right: 0;
+}
+
+.seg-carb-sugars {
+  width: 30%;
+  background: var(--green);
+}
+
+.seg-carb-starch {
+  width: 37%;
+  background: var(--blue);
+}
+
+.seg-carb-fiber {
+  width: 33%;
+  background: var(--gray);
+}
+
+.seg-protein-eaas {
+  width: 62%;
+  background: var(--beige);
+}
+
+.seg-protein-rest {
+  width: 38%;
+  background: var(--gray);
+}
+
+.seg-fat-saturated {
+  width: 33%;
+  background: var(--green);
+}
+
+.seg-fat-mono {
+  width: 30%;
+  background: var(--blue);
+}
+
+.seg-fat-poly {
+  width: 37%;
+  background: var(--gray);
+}
+
+.legend-list {
+  list-style: none;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 2rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  color: var(--text-muted);
+  font-size: clamp(1.55rem, 1.35rem + 0.1vw, 1.8rem);
+  line-height: 1.25;
+  max-width: 18rem;
+}
+
+.legend-swatch {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.28rem;
+  margin-top: 0.08rem;
+  flex-shrink: 0;
+}
+
+.swatch-sugar,
+.swatch-saturated {
+  background: var(--green);
+}
+
+.swatch-starch,
+.swatch-mono {
+  background: var(--blue);
+}
+
+.swatch-fiber,
+.swatch-poly {
+  background: var(--gray);
+}
+
+.swatch-eaas {
+  background: var(--beige);
+}
+
+.flavor-panel {
+  display: grid;
+  align-content: center;
+  padding: 2rem;
+}
+
+.donut-chart {
+  width: min(100%, 33.75rem);
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  position: relative;
+  background: conic-gradient(
+    var(--blue) 0% 55%,
+    var(--lavender) 55% 82%,
+    var(--chart-light) 82% 100%
+  );
+}
+
+.donut-chart::after {
+  content: "";
+  position: absolute;
+  width: 47%;
+  height: 47%;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--panel-bg);
+}
+
+.slice-label {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(1.75rem, 1.55rem + 0.15vw, 2.05rem);
+  text-align: center;
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+
+.slice-label span {
+  display: block;
+}
+
+.label-strawberry {
+  top: 19%;
+  left: 12%;
+}
+
+.label-vanilla {
+  bottom: 30%;
+  left: 8%;
+}
+
+.label-chocolate {
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  color: #f2f4fb;
+}
+
+.micronutrient-panel {
+  padding: 2rem 2.3rem 2.3rem;
+  min-height: 23rem;
+  display: grid;
+  align-content: start;
+  gap: 2rem;
+}
+
+.micronutrient-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.micro-item {
+  margin: 0;
+}
+
+.micro-name {
+  margin: 0;
+  font-size: clamp(1.55rem, 1.45rem + 0.2vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.micro-meta {
+  margin: 0.45rem 0 0.9rem;
+  font-size: clamp(1.25rem, 1.2rem + 0.1vw, 1.48rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.micro-bar {
+  display: flex;
+  width: 100%;
+  height: 2.25rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background: var(--bar-track);
+}
+
+.micro-fill {
+  flex: 0 0 auto;
+  background: #6ea953;
+}
+
+.micro-rest {
+  flex: 1;
+  background: #f7f7f8;
+}
+
+.w-62 {
+  width: 62%;
+}
+
+.w-58 {
+  width: 58%;
+}
+
+.w-57 {
+  width: 57%;
+}
+
+.w-48 {
+  width: 48%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 80rem) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-divider {
+    margin: 0;
+  }
+
+  .flavor-panel {
+    padding: 2.3rem;
+  }
+
+  .micronutrient-panel {
+    min-height: auto;
+  }
+
+  .micronutrient-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40rem) {
+  body {
+    padding: 1.1rem;
+  }
+
+  .nutrition-panel,
+  .flavor-panel,
+  .micronutrient-panel {
+    padding: 1.35rem;
+  }
+
+  .stacked-bar {
+    height: 2.65rem;
+  }
+
+  .micro-bar {
+    height: 1.8rem;
+  }
+
+  .legend-item {
+    font-size: 1.25rem;
+  }
+}
