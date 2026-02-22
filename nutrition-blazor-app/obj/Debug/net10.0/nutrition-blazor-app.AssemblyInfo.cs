@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("nutrition-blazor-app")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e05012bf0231e49ea737a317f3a6c661e1bd49cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d696911117e910df7d2bfc8ca35c257948775993")]
 [assembly: System.Reflection.AssemblyProductAttribute("nutrition-blazor-app")]
 [assembly: System.Reflection.AssemblyTitleAttribute("nutrition-blazor-app")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
