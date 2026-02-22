@@ -11,15 +11,15 @@ public sealed class MacronutrientPieWidgetTests : TestContext
     {
         var slices = new[]
         {
-            new MacronutrientPieSlice("Carbohydrates", 63, "blue", "carbohydrates"),
-            new MacronutrientPieSlice("Fats", 25, "beige", "fats"),
-            new MacronutrientPieSlice("Proteins", 12, "green", "proteins")
+            new MacronutrientPieSlice("Carbohydrates", 63, "blue"),
+            new MacronutrientPieSlice("Fats", 25, "beige"),
+            new MacronutrientPieSlice("Proteins", 12, "green")
         };
 
         var cut = RenderComponent<MacronutrientPieWidget>(parameters =>
             parameters.Add(component => component.Slices, slices));
 
-        var chart = cut.Find("figure.donut-chart");
+        var chart = cut.Find("div.donut-chart");
         var style = chart.GetAttribute("style");
 
         Assert.Equal("img", chart.GetAttribute("role"));
@@ -34,26 +34,32 @@ public sealed class MacronutrientPieWidgetTests : TestContext
     }
 
     [Fact]
-    public void RendersCaptionPerSliceWithExpectedClasses()
+    public void RendersLegendUnderChartWithColorSwatches()
     {
         var slices = new[]
         {
-            new MacronutrientPieSlice("Carbohydrates", 60, "blue", "carbohydrates"),
-            new MacronutrientPieSlice("Fats", 25, "beige", "fats"),
-            new MacronutrientPieSlice("Proteins", 15, "green", "proteins")
+            new MacronutrientPieSlice("Carbohydrates", 60, "blue"),
+            new MacronutrientPieSlice("Fats", 25, "beige"),
+            new MacronutrientPieSlice("Proteins", 15, "green")
         };
 
         var cut = RenderComponent<MacronutrientPieWidget>(parameters =>
             parameters.Add(component => component.Slices, slices));
 
-        var captions = cut.FindAll("figcaption.slice-label");
+        var donut = cut.Find("div.donut-chart");
+        var legendItems = cut.FindAll("li.pie-legend-item");
+        var swatches = cut.FindAll("span.pie-legend-swatch");
 
-        Assert.Equal(3, captions.Count);
-        Assert.Contains(captions, c => c.ClassList.Contains("label-carbohydrates"));
-        Assert.Contains(captions, c => c.ClassList.Contains("label-fats"));
-        Assert.Contains(captions, c => c.ClassList.Contains("label-proteins"));
+        Assert.Empty(cut.FindAll("figcaption.slice-label"));
+        Assert.Equal(3, legendItems.Count);
+        Assert.Equal(3, swatches.Count);
+        Assert.Contains("Carbohydrates - 60%", legendItems[0].TextContent);
+        Assert.Contains("Fats - 25%", legendItems[1].TextContent);
+        Assert.Contains("Proteins - 15%", legendItems[2].TextContent);
 
-        var blueSliceCaption = captions.Single(c => c.ClassList.Contains("label-carbohydrates"));
-        Assert.Contains("slice-light-text", blueSliceCaption.ClassName);
+        Assert.Equal("background: var(--blue);", swatches[0].GetAttribute("style"));
+        Assert.Equal("background: var(--beige);", swatches[1].GetAttribute("style"));
+        Assert.Equal("background: var(--green);", swatches[2].GetAttribute("style"));
+        Assert.NotNull(donut.NextElementSibling);
     }
 }

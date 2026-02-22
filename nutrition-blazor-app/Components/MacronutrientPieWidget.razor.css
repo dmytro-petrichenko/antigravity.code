@@ -1,3 +1,10 @@
+.macronutrient-pie-widget {
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    gap: 0.95rem;
+}
+
 .donut-chart {
     width: min(100%, 33.75rem);
     margin: 0 auto;
@@ -17,37 +24,39 @@
     background: var(--panel-bg);
 }
 
-.slice-label {
-    position: absolute;
-    z-index: 1;
+.pie-legend {
+    width: min(100%, 20rem);
     margin: 0;
-    max-width: 11rem;
-    font-size: clamp(1.15rem, 1.05rem + 0.2vw, 1.45rem);
-    text-align: center;
-    line-height: 1.15;
+}
+
+.pie-legend-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.pie-legend-item {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.6rem;
     color: var(--text-muted);
+    font-size: clamp(1rem, 0.95rem + 0.15vw, 1.2rem);
+    line-height: 1.25;
+    min-width: 0;
 }
 
-.slice-label span {
-    display: block;
+.pie-legend-swatch {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.28rem;
+    margin-top: 0.14rem;
+    flex-shrink: 0;
 }
 
-.slice-light-text {
-    color: #f2f4fb;
-}
-
-.label-proteins {
-    top: 19%;
-    left: 12%;
-}
-
-.label-fats {
-    bottom: 30%;
-    left: 8%;
-}
-
-.label-carbohydrates {
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
+@media (max-width: 40rem) {
+    .pie-legend {
+        width: 100%;
+    }
 }

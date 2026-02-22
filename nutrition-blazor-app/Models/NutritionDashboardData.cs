@@ -32,8 +32,7 @@ public enum NutrientColor
 public sealed record MacronutrientPieSlice(
     string Label,
     int Percentage,
-    string ColorKey,
-    string PositionKey);
+    string ColorKey);
 
 public sealed record MicronutrientItem(
     string Name,

@@ -41,9 +41,9 @@ public sealed class MockNutritionDataService : INutritionDataService
         ],
         MacronutrientPieSlices:
         [
-            new MacronutrientPieSlice("Carbohydrates", 63, "blue", "carbohydrates"),
-            new MacronutrientPieSlice("Fats", 25, "beige", "fats"),
-            new MacronutrientPieSlice("Proteins", 12, "green", "proteins")
+            new MacronutrientPieSlice("Carbohydrates", 63, "blue"),
+            new MacronutrientPieSlice("Fats", 25, "beige"),
+            new MacronutrientPieSlice("Proteins", 12, "green")
         ],
         Vitamins:
         [
