@@ -15,7 +15,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-    gap: 2rem;
+    gap: 1.1rem;
     color: var(--text-main);
 }
 
@@ -26,10 +26,7 @@
 }
 
 .dashboard-divider {
-    grid-column: 1 / -1;
-    height: 1px;
-    background: var(--rule);
-    margin: 0.15rem 0 0.25rem;
+    display: none;
 }
 
 .nutrition-panel {
@@ -37,9 +34,9 @@
 }
 
 .nutrition-panel ::deep .macro-widget + .macro-widget {
-    margin-top: 2.2rem;
-    padding-top: 2.2rem;
-    border-top: 1px solid var(--rule);
+    margin-top: 1.4rem;
+    padding-top: 1.4rem;
+    border-top: 0;
 }
 
 .macronutrient-pie-panel {
@@ -52,7 +49,7 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .sr-only {
@@ -69,10 +66,6 @@
 @media (max-width: 80rem) {
     .dashboard {
         grid-template-columns: 1fr;
-    }
-
-    .dashboard-divider {
-        margin: 0;
     }
 
     .macronutrient-pie-panel {
