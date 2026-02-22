@@ -11,8 +11,6 @@
     --blue: #8399ca;
     --gray: #b7b9c3;
     --beige: #b6a48f;
-    --lavender: #afb4c7;
-    --chart-light: #dfdfe3;
     width: min(96rem, 100%);
     margin: 0 auto;
     display: grid;
@@ -44,7 +42,7 @@
     border-top: 1px solid var(--rule);
 }
 
-.flavor-panel {
+.macronutrient-pie-panel {
     display: grid;
     align-content: center;
     padding: 2rem;
@@ -77,7 +75,7 @@
         margin: 0;
     }
 
-    .flavor-panel {
+    .macronutrient-pie-panel {
         padding: 2.3rem;
     }
 
@@ -88,7 +86,7 @@
 
 @media (max-width: 40rem) {
     .nutrition-panel,
-    .flavor-panel {
+    .macronutrient-pie-panel {
         padding: 1.35rem;
     }
 }

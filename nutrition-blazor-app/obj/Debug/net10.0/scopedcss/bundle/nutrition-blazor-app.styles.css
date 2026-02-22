@@ -1,56 +1,3 @@
-/* /Components/FlavorPieWidget.razor.rz.scp.css */
-.donut-chart[b-vd8y3w7ctz] {
-    width: min(100%, 33.75rem);
-    margin: 0 auto;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    position: relative;
-}
-
-.donut-chart[b-vd8y3w7ctz]::after {
-    content: "";
-    position: absolute;
-    width: 47%;
-    height: 47%;
-    inset: 0;
-    margin: auto;
-    border-radius: 50%;
-    background: var(--panel-bg);
-}
-
-.slice-label[b-vd8y3w7ctz] {
-    position: absolute;
-    z-index: 1;
-    margin: 0;
-    font-size: clamp(1.75rem, 1.55rem + 0.15vw, 2.05rem);
-    text-align: center;
-    line-height: 1.2;
-    color: var(--text-muted);
-}
-
-.slice-label span[b-vd8y3w7ctz] {
-    display: block;
-}
-
-.slice-light-text[b-vd8y3w7ctz] {
-    color: #f2f4fb;
-}
-
-.label-strawberry[b-vd8y3w7ctz] {
-    top: 19%;
-    left: 12%;
-}
-
-.label-vanilla[b-vd8y3w7ctz] {
-    bottom: 30%;
-    left: 8%;
-}
-
-.label-chocolate[b-vd8y3w7ctz] {
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-}
 /* /Components/MacroBarWidget.razor.rz.scp.css */
 .macro-widget h2[b-gs24lyyzlc] {
     margin: 0 0 1rem;
@@ -62,7 +9,7 @@
 .stacked-bar[b-gs24lyyzlc] {
     display: flex;
     width: 100%;
-    height: 3.25rem;
+    height: 2.15rem;
     border-radius: var(--radius-bar);
     overflow: hidden;
     background: var(--gray);
@@ -95,17 +42,17 @@
 
 .legend-list[b-gs24lyyzlc] {
     list-style: none;
-    margin: 1.35rem 0 0;
+    margin: 0.9rem 0 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem 2rem;
+    gap: 0.65rem 1.6rem;
 }
 
 .legend-item[b-gs24lyyzlc] {
     display: inline-flex;
     align-items: flex-start;
-    gap: 0.85rem;
+    gap: 0.6rem;
     color: var(--text-muted);
     font-size: clamp(1.55rem, 1.35rem + 0.1vw, 1.8rem);
     line-height: 1.25;
@@ -113,10 +60,10 @@
 }
 
 .legend-swatch[b-gs24lyyzlc] {
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 0.28rem;
-    margin-top: 0.08rem;
+    margin-top: 0.14rem;
     flex-shrink: 0;
 }
 
@@ -138,12 +85,66 @@
 
 @media (max-width: 40rem) {
     .stacked-bar[b-gs24lyyzlc] {
-        height: 2.65rem;
+        height: 1.75rem;
     }
 
     .legend-item[b-gs24lyyzlc] {
         font-size: 1.25rem;
     }
+}
+/* /Components/MacronutrientPieWidget.razor.rz.scp.css */
+.donut-chart[b-kcjht7sekp] {
+    width: min(100%, 33.75rem);
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    position: relative;
+}
+
+.donut-chart[b-kcjht7sekp]::after {
+    content: "";
+    position: absolute;
+    width: 47%;
+    height: 47%;
+    inset: 0;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--panel-bg);
+}
+
+.slice-label[b-kcjht7sekp] {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    max-width: 11rem;
+    font-size: clamp(1.15rem, 1.05rem + 0.2vw, 1.45rem);
+    text-align: center;
+    line-height: 1.15;
+    color: var(--text-muted);
+}
+
+.slice-label span[b-kcjht7sekp] {
+    display: block;
+}
+
+.slice-light-text[b-kcjht7sekp] {
+    color: #f2f4fb;
+}
+
+.label-proteins[b-kcjht7sekp] {
+    top: 19%;
+    left: 12%;
+}
+
+.label-fats[b-kcjht7sekp] {
+    bottom: 30%;
+    left: 8%;
+}
+
+.label-carbohydrates[b-kcjht7sekp] {
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
 }
 /* /Components/MicronutrientPanelWidget.razor.rz.scp.css */
 .panel.micronutrient-panel[b-0dldfrrp34] {
@@ -232,8 +233,6 @@
     --blue: #8399ca;
     --gray: #b7b9c3;
     --beige: #b6a48f;
-    --lavender: #afb4c7;
-    --chart-light: #dfdfe3;
     width: min(96rem, 100%);
     margin: 0 auto;
     display: grid;
@@ -265,7 +264,7 @@
     border-top: 1px solid var(--rule);
 }
 
-.flavor-panel[b-035rb2j9ti] {
+.macronutrient-pie-panel[b-035rb2j9ti] {
     display: grid;
     align-content: center;
     padding: 2rem;
@@ -298,7 +297,7 @@
         margin: 0;
     }
 
-    .flavor-panel[b-035rb2j9ti] {
+    .macronutrient-pie-panel[b-035rb2j9ti] {
         padding: 2.3rem;
     }
 
@@ -309,7 +308,7 @@
 
 @media (max-width: 40rem) {
     .nutrition-panel[b-035rb2j9ti],
-    .flavor-panel[b-035rb2j9ti] {
+    .macronutrient-pie-panel[b-035rb2j9ti] {
         padding: 1.35rem;
     }
 }

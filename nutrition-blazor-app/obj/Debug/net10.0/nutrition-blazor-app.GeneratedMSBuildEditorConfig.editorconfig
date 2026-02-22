@@ -36,13 +36,13 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Components/FlavorPieWidget.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9GbGF2b3JQaWVXaWRnZXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-vd8y3w7ctz
-
 [/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Components/MacroBarWidget.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYWNyb0JhcldpZGdldC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-gs24lyyzlc
+
+[/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Components/MacronutrientPieWidget.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYWNyb251dHJpZW50UGllV2lkZ2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-kcjht7sekp
 
 [/Users/dmitry.petrichenko/PrivateProjects/antigravity.code/nutrition-blazor-app/Components/MicronutrientPanelWidget.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NaWNyb251dHJpZW50UGFuZWxXaWRnZXQucmF6b3I=

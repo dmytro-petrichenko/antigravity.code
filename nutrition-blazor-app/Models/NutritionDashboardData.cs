@@ -2,7 +2,7 @@ namespace nutrition_blazor_app.Models;
 
 public sealed record NutritionDashboardData(
     IReadOnlyList<MacroSection> MacroSections,
-    IReadOnlyList<FlavorSlice> FlavorSlices,
+    IReadOnlyList<MacronutrientPieSlice> MacronutrientPieSlices,
     IReadOnlyList<MicronutrientItem> Vitamins,
     IReadOnlyList<MicronutrientItem> Minerals);
 
@@ -29,7 +29,7 @@ public enum NutrientColor
     Beige
 }
 
-public sealed record FlavorSlice(
+public sealed record MacronutrientPieSlice(
     string Label,
     int Percentage,
     string ColorKey,

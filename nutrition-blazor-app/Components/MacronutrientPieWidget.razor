@@ -1,0 +1,38 @@
+<figure class="donut-chart" role="img" aria-label="@BuildMacronutrientAriaLabel()" style="@GetMacronutrientGradientStyle()">
+    @foreach (var slice in Slices)
+    {
+        <figcaption class="slice-label @GetPositionClass(slice.PositionKey) @GetSliceTextClass(slice.ColorKey)">
+            @slice.Label<br /><span>@slice.Percentage%</span>
+        </figcaption>
+    }
+</figure>
+
+@code {
+    [Parameter, EditorRequired]
+    public IReadOnlyList<MacronutrientPieSlice> Slices { get; set; } = [];
+
+    private static string GetPositionClass(string positionKey) => $"label-{positionKey}";
+
+    private static string GetSliceTextClass(string colorKey) => colorKey == "blue" ? "slice-light-text" : string.Empty;
+
+    private string GetMacronutrientGradientStyle()
+    {
+        var offset = 0;
+        var stops = Slices.Select(slice =>
+        {
+            var start = offset;
+            offset += slice.Percentage;
+            return $"var({GetCssVariable(slice.ColorKey)}) {start}% {offset}%";
+        });
+
+        return $"background: conic-gradient({string.Join(", ", stops)});";
+    }
+
+    private static string GetCssVariable(string colorKey) => $"--{colorKey}";
+
+    private string BuildMacronutrientAriaLabel()
+    {
+        var parts = Slices.Select(slice => $"{slice.Label} {slice.Percentage} percent");
+        return $"Macronutrient distribution: {string.Join(", ", parts)}";
+    }
+}

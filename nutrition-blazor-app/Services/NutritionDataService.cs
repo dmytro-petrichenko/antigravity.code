@@ -39,11 +39,11 @@ public sealed class MockNutritionDataService : INutritionDataService
                     new NutrientSegment("Polyunsaturated", "5g", 37, NutrientColor.Gray)
                 ])
         ],
-        FlavorSlices:
+        MacronutrientPieSlices:
         [
-            new FlavorSlice("Chocolate", 55, "blue", "chocolate"),
-            new FlavorSlice("Vanilla", 27, "lavender", "vanilla"),
-            new FlavorSlice("Strawberry", 18, "light", "strawberry")
+            new MacronutrientPieSlice("Carbohydrates", 63, "blue", "carbohydrates"),
+            new MacronutrientPieSlice("Fats", 25, "beige", "fats"),
+            new MacronutrientPieSlice("Proteins", 12, "green", "proteins")
         ],
         Vitamins:
         [

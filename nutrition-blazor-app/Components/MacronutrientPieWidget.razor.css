@@ -21,9 +21,10 @@
     position: absolute;
     z-index: 1;
     margin: 0;
-    font-size: clamp(1.75rem, 1.55rem + 0.15vw, 2.05rem);
+    max-width: 11rem;
+    font-size: clamp(1.15rem, 1.05rem + 0.2vw, 1.45rem);
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.15;
     color: var(--text-muted);
 }
 
@@ -35,17 +36,17 @@
     color: #f2f4fb;
 }
 
-.label-strawberry {
+.label-proteins {
     top: 19%;
     left: 12%;
 }
 
-.label-vanilla {
+.label-fats {
     bottom: 30%;
     left: 8%;
 }
 
-.label-chocolate {
+.label-carbohydrates {
     top: 50%;
     right: 8%;
     transform: translateY(-50%);
