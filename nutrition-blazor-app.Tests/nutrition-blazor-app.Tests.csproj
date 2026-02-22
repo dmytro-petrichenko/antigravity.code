@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="bunit" Version="1.33.16" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
@@ -19,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../nutrition-blazor-app/Components/MacroBarWidgetLogic.cs" Link="Shared/MacroBarWidgetLogic.cs" />
-    <Compile Include="../nutrition-blazor-app/Models/NutritionDashboardData.cs" Link="Shared/NutritionDashboardData.cs" />
+    <ProjectReference Include="../nutrition-blazor-app/nutrition-blazor-app.csproj" />
   </ItemGroup>
 
 </Project>
