@@ -1,0 +1,52 @@
+.donut-chart {
+    width: min(100%, 33.75rem);
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    position: relative;
+}
+
+.donut-chart::after {
+    content: "";
+    position: absolute;
+    width: 47%;
+    height: 47%;
+    inset: 0;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--panel-bg);
+}
+
+.slice-label {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    font-size: clamp(1.75rem, 1.55rem + 0.15vw, 2.05rem);
+    text-align: center;
+    line-height: 1.2;
+    color: var(--text-muted);
+}
+
+.slice-label span {
+    display: block;
+}
+
+.slice-light-text {
+    color: #f2f4fb;
+}
+
+.label-strawberry {
+    top: 19%;
+    left: 12%;
+}
+
+.label-vanilla {
+    bottom: 30%;
+    left: 8%;
+}
+
+.label-chocolate {
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+}

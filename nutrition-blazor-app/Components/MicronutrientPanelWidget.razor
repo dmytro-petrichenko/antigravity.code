@@ -1,0 +1,26 @@
+<section class="panel micronutrient-panel" aria-label="@Title">
+    @foreach (var item in Items)
+    {
+        <article class="micro-item">
+            <h2 class="micro-name">@item.Name</h2>
+            <p class="micro-meta">@item.Details</p>
+            <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(item)">
+                <span class="micro-fill" style="@GetWidthStyle(item.Percentage)"></span>
+                <span class="micro-rest"></span>
+            </div>
+        </article>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public IReadOnlyList<MicronutrientItem> Items { get; set; } = [];
+
+    private static string GetWidthStyle(double percentage) => $"width: {percentage:0.##}%;";
+
+    private static string BuildMicroAriaLabel(MicronutrientItem item)
+        => $"{item.Name}: {item.Details}";
+}

@@ -1,0 +1,42 @@
+<figure class="donut-chart" role="img" aria-label="@BuildFlavorAriaLabel()" style="@GetFlavorGradientStyle()">
+    @foreach (var slice in Slices)
+    {
+        <figcaption class="slice-label @GetFlavorPositionClass(slice.PositionKey) @GetFlavorTextClass(slice.ColorKey)">
+            @slice.Label<br /><span>@slice.Percentage%</span>
+        </figcaption>
+    }
+</figure>
+
+@code {
+    [Parameter, EditorRequired]
+    public IReadOnlyList<FlavorSlice> Slices { get; set; } = [];
+
+    private static string GetFlavorPositionClass(string positionKey) => $"label-{positionKey}";
+
+    private static string GetFlavorTextClass(string colorKey) => colorKey == "blue" ? "slice-light-text" : string.Empty;
+
+    private string GetFlavorGradientStyle()
+    {
+        var offset = 0;
+        var stops = Slices.Select(slice =>
+        {
+            var start = offset;
+            offset += slice.Percentage;
+            return $"var({GetFlavorCssVariable(slice.ColorKey)}) {start}% {offset}%";
+        });
+
+        return $"background: conic-gradient({string.Join(", ", stops)});";
+    }
+
+    private static string GetFlavorCssVariable(string colorKey) => colorKey switch
+    {
+        "light" => "--chart-light",
+        _ => $"--{colorKey}"
+    };
+
+    private string BuildFlavorAriaLabel()
+    {
+        var parts = Slices.Select(slice => $"{slice.Label} {slice.Percentage} percent");
+        return $"Flavor distribution: {string.Join(", ", parts)}";
+    }
+}

@@ -50,110 +50,11 @@
     padding: 2rem;
 }
 
-.donut-chart {
-    width: min(100%, 33.75rem);
-    margin: 0 auto;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    position: relative;
-}
-
-.donut-chart::after {
-    content: "";
-    position: absolute;
-    width: 47%;
-    height: 47%;
-    inset: 0;
-    margin: auto;
-    border-radius: 50%;
-    background: var(--panel-bg);
-}
-
-.slice-label {
-    position: absolute;
-    z-index: 1;
-    margin: 0;
-    font-size: clamp(1.75rem, 1.55rem + 0.15vw, 2.05rem);
-    text-align: center;
-    line-height: 1.2;
-    color: var(--text-muted);
-}
-
-.slice-label span {
-    display: block;
-}
-
-.slice-light-text {
-    color: #f2f4fb;
-}
-
-.label-strawberry {
-    top: 19%;
-    left: 12%;
-}
-
-.label-vanilla {
-    bottom: 30%;
-    left: 8%;
-}
-
-.label-chocolate {
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-}
-
 .micronutrient-row {
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 2rem;
-}
-
-.micronutrient-panel {
-    padding: 2rem 2.3rem 2.3rem;
-    min-height: 23rem;
-    display: grid;
-    align-content: start;
-    gap: 2rem;
-}
-
-.micro-item {
-    margin: 0;
-}
-
-.micro-name {
-    margin: 0;
-    font-size: clamp(1.55rem, 1.45rem + 0.2vw, 1.9rem);
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-.micro-meta {
-    margin: 0.45rem 0 0.9rem;
-    font-size: clamp(1.25rem, 1.2rem + 0.1vw, 1.48rem);
-    font-weight: 600;
-    line-height: 1.25;
-}
-
-.micro-bar {
-    display: flex;
-    width: 100%;
-    height: 2.25rem;
-    border-radius: 0.25rem;
-    overflow: hidden;
-    background: var(--gray);
-}
-
-.micro-fill {
-    flex: 0 0 auto;
-    background: var(--green);
-    border-right: 2px solid rgba(255, 255, 255, 0.55);
-}
-
-.micro-rest {
-    flex: 1;
-    background: var(--gray);
 }
 
 .sr-only {
@@ -180,10 +81,6 @@
         padding: 2.3rem;
     }
 
-    .micronutrient-panel {
-        min-height: auto;
-    }
-
     .micronutrient-row {
         grid-template-columns: 1fr;
     }
@@ -191,12 +88,7 @@
 
 @media (max-width: 40rem) {
     .nutrition-panel,
-    .flavor-panel,
-    .micronutrient-panel {
+    .flavor-panel {
         padding: 1.35rem;
-    }
-
-    .micro-bar {
-        height: 1.8rem;
     }
 }

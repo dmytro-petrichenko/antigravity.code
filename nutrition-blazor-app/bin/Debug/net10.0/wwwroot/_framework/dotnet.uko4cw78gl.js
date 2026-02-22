@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "nutrition-blazor-app",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-Nqc7NqhpHuXZcPe0Wakd9CZIVE2jNphhuBTu0h869Sc=",
+    "hash": "sha256-1qNkHlo0QahjGsjzbfl4C6WQuw/2J/pC6yFDryPuGx4=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.cs8mcre4gh.js"
@@ -1039,15 +1039,15 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "nutrition-blazor-app.wasm",
-        "name": "nutrition-blazor-app.744p8xhxd4.wasm",
-        "integrity": "sha256-F11hA8JmZkd7fXXz5aYYrR21DTY4Nh/6i0h7yy9Dpc0="
+        "name": "nutrition-blazor-app.xi38bvwal0.wasm",
+        "integrity": "sha256-2QpPqdnIjARTP6yqGzKqG5+OMi3/kJM/pVTQKBq5wJY="
       }
     ],
     "pdb": [
       {
         "virtualPath": "nutrition-blazor-app.pdb",
-        "name": "nutrition-blazor-app.vudp7abx02.pdb",
-        "integrity": "sha256-Z9GTvRilte8HlXVaU3l/siFb7KfvBLDET/dO6+55ykg="
+        "name": "nutrition-blazor-app.34yg6qarad.pdb",
+        "integrity": "sha256-TSGATuizD+jpom8BrqsvUb5jWYewdj6yx/Zq31aXJEw="
       }
     ],
     "libraryInitializers": [

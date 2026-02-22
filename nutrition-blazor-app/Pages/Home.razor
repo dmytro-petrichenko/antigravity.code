@@ -14,46 +14,14 @@
     </section>
 
     <section class="panel flavor-panel" aria-label="Flavor split">
-        <figure class="donut-chart" role="img" aria-label="@BuildFlavorAriaLabel()" style="@GetFlavorGradientStyle()">
-            @foreach (var slice in Dashboard.FlavorSlices)
-            {
-                <figcaption class="slice-label @GetFlavorPositionClass(slice.PositionKey) @GetFlavorTextClass(slice.ColorKey)">
-                    @slice.Label<br /><span>@slice.Percentage%</span>
-                </figcaption>
-            }
-        </figure>
+        <FlavorPieWidget Slices="@Dashboard.FlavorSlices" />
     </section>
 
     <div class="dashboard-divider" aria-hidden="true"></div>
 
     <div class="micronutrient-row">
-        <section class="panel micronutrient-panel" aria-label="Vitamins">
-            @foreach (var vitamin in Dashboard.Vitamins)
-            {
-                <article class="micro-item">
-                    <h2 class="micro-name">@vitamin.Name</h2>
-                    <p class="micro-meta">@vitamin.Details</p>
-                    <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(vitamin)">
-                        <span class="micro-fill" style="@GetWidthStyle(vitamin.Percentage)"></span>
-                        <span class="micro-rest"></span>
-                    </div>
-                </article>
-            }
-        </section>
-
-        <section class="panel micronutrient-panel" aria-label="Minerals">
-            @foreach (var mineral in Dashboard.Minerals)
-            {
-                <article class="micro-item">
-                    <h2 class="micro-name">@mineral.Name</h2>
-                    <p class="micro-meta">@mineral.Details</p>
-                    <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(mineral)">
-                        <span class="micro-fill" style="@GetWidthStyle(mineral.Percentage)"></span>
-                        <span class="micro-rest"></span>
-                    </div>
-                </article>
-            }
-        </section>
+        <MicronutrientPanelWidget Title="Vitamins" Items="@Dashboard.Vitamins" />
+        <MicronutrientPanelWidget Title="Minerals" Items="@Dashboard.Minerals" />
     </div>
 </main>
 
@@ -64,38 +32,4 @@
     {
         Dashboard = NutritionDataService.GetDashboard();
     }
-
-    private static string GetWidthStyle(double percentage) => $"width: {percentage:0.##}%;";
-
-    private static string GetFlavorPositionClass(string positionKey) => $"label-{positionKey}";
-
-    private static string GetFlavorTextClass(string colorKey) => colorKey == "blue" ? "slice-light-text" : string.Empty;
-
-    private string GetFlavorGradientStyle()
-    {
-        var offset = 0;
-        var stops = Dashboard.FlavorSlices.Select(slice =>
-        {
-            var start = offset;
-            offset += slice.Percentage;
-            return $"var({GetFlavorCssVariable(slice.ColorKey)}) {start}% {offset}%";
-        });
-
-        return $"background: conic-gradient({string.Join(", ", stops)});";
-    }
-
-    private static string GetFlavorCssVariable(string colorKey) => colorKey switch
-    {
-        "light" => "--chart-light",
-        _ => $"--{colorKey}"
-    };
-
-    private string BuildFlavorAriaLabel()
-    {
-        var parts = Dashboard.FlavorSlices.Select(slice => $"{slice.Label} {slice.Percentage} percent");
-        return $"Flavor distribution: {string.Join(", ", parts)}";
-    }
-
-    private static string BuildMicroAriaLabel(MicronutrientItem item)
-        => $"{item.Name}: {item.Details}";
 }
