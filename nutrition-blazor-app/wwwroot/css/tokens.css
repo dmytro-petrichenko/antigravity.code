@@ -80,10 +80,10 @@
     --pie-legend-max-width: 20rem;
 
     /* Radius tokens */
-    --radius-xs: 0.25rem;
-    --radius-sm: 0.28rem;
-    --radius-md: 0.45rem;
-    --radius-lg: 1.85rem;
+    --radius-xs: 0.05rem;
+    --radius-sm: 0.1rem;
+    --radius-md: 0.2rem;
+    --radius-lg: 0.5rem;
     --radius-round: 50%;
 
     --radius-panel: var(--radius-lg);
