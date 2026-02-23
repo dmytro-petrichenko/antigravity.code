@@ -15,15 +15,10 @@
 
 .nutrition-facts-title {
     margin: 0;
-    font-size: clamp(1.35rem, 1.2rem + 0.35vw, 1.75rem);
-    font-weight: var(--fw-semibold);
-    letter-spacing: 0.01em;
 }
 
 .nutrition-facts-note {
     margin: 0;
-    color: var(--c-muted);
-    font-size: 0.95rem;
 }
 
 .nutrition-facts-grid {
@@ -44,18 +39,10 @@
 
 .nutrition-fact-label {
     margin: 0;
-    color: var(--c-muted);
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.2;
 }
 
 .nutrition-fact-value {
     margin: var(--space-1) 0 0;
-    color: var(--c-text);
-    font-size: 1.35rem;
-    font-weight: var(--fw-semibold);
-    line-height: 1.15;
 }
 
 @media (max-width: 80rem) {

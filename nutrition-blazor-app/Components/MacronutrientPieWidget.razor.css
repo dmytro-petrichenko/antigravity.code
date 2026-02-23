@@ -34,11 +34,6 @@
     gap: 0.6rem;
 }
 
-.pie-legend-item {
-    font-size: clamp(1rem, 0.95rem + 0.15vw, 1.2rem);
-    line-height: 1.25;
-}
-
 @media (max-width: 40rem) {
     .pie-legend {
         width: 100%;

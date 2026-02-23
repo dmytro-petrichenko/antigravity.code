@@ -1,5 +1,5 @@
 <article class="macro-widget">
-    <h2>@HeaderText</h2>
+    <h2 class="ds-text-section-title">@HeaderText</h2>
 
     <div class="stacked-bar ds-meter-track" role="img" aria-label="@BuildAriaLabel()">
         @foreach (var item in Sections)
@@ -12,7 +12,7 @@
     <ul class="legend-list ds-list-reset @LegendLayoutClass">
         @foreach (var item in _legendItems)
         {
-            <li class="legend-item ds-legend-item">
+            <li class="legend-item ds-legend-item ds-text-label">
                 <span class="legend-swatch ds-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
                       aria-hidden="true"></span>
                 <span class="legend-text">@item.Label - @item.Amount</span>

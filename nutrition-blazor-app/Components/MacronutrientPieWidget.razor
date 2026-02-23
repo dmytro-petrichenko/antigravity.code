@@ -5,7 +5,7 @@
         <ul class="pie-legend-list ds-list-reset">
             @foreach (var slice in Slices)
             {
-                <li class="pie-legend-item ds-legend-item">
+                <li class="pie-legend-item ds-legend-item ds-text-label">
                     <span class="pie-legend-swatch ds-swatch" aria-hidden="true" style="@GetLegendSwatchStyle(slice.ColorKey)"></span>
                     <span>@slice.Label - @slice.Percentage%</span>
                 </li>

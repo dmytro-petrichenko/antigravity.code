@@ -14,16 +14,10 @@
 
 .micro-name {
     margin: 0;
-    font-size: clamp(1.55rem, 1.45rem + 0.2vw, 1.9rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1.2;
 }
 
 .micro-meta {
     margin: 0.45rem 0 0.9rem;
-    font-size: clamp(1.25rem, 1.2rem + 0.1vw, 1.48rem);
-    font-weight: var(--fw-semibold);
-    line-height: 1.25;
 }
 
 .micro-bar {

@@ -12,11 +12,46 @@
     padding: 0;
 }
 
+/*
+ Shared page typography roles (page hierarchy limited to 4 styles):
+ 1) Section Title (Primary Heading): major section/card headings.
+ 2) Metric Highlight: emphasized values and key numeric data.
+ 3) Label / Descriptor: names, legends, and structural labels.
+ 4) Secondary / Supporting Text: notes, qualifiers, and metadata.
+*/
+.ds-text-section-title {
+    color: var(--type-section-title-color);
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    line-height: var(--type-section-title-line-height);
+    letter-spacing: var(--type-section-title-letter-spacing);
+}
+
+.ds-text-metric {
+    color: var(--type-metric-color);
+    font-size: var(--type-metric-size);
+    font-weight: var(--type-metric-weight);
+    line-height: var(--type-metric-line-height);
+}
+
+.ds-text-label {
+    color: var(--type-label-color);
+    font-size: var(--type-label-size);
+    font-weight: var(--type-label-weight);
+    line-height: var(--type-label-line-height);
+}
+
+.ds-text-secondary {
+    color: var(--type-secondary-color);
+    font-size: var(--type-secondary-size);
+    font-weight: var(--type-secondary-weight);
+    line-height: var(--type-secondary-line-height);
+}
+
 .ds-legend-item {
     display: inline-flex;
     align-items: flex-start;
     gap: 0.6rem;
-    color: var(--c-muted);
     min-width: 0;
 }
 

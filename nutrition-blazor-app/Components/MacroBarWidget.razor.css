@@ -1,8 +1,5 @@
 .macro-widget h2 {
     margin: 0 0 var(--space-4);
-    font-size: clamp(2rem, 1.8rem + 0.35vw, 2.35rem);
-    font-weight: var(--fw-semibold);
-    letter-spacing: 0.01em;
 }
 
 .stacked-bar {
@@ -42,8 +39,6 @@
 }
 
 .legend-item {
-    font-size: clamp(1.55rem, 1.35rem + 0.1vw, 1.8rem);
-    line-height: 1.25;
     max-width: 22rem;
 }
 
@@ -75,10 +70,6 @@
 @media (max-width: 40rem) {
     .stacked-bar {
         height: var(--macro-bar-height-mobile);
-    }
-
-    .legend-item {
-        font-size: 1.25rem;
     }
 
     .legend-list-few-items .legend-text {
