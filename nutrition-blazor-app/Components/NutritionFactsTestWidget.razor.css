@@ -1,0 +1,77 @@
+.nutrition-facts-test-panel {
+    grid-column: 1 / -1;
+    padding: var(--space-6) var(--panel-padding-main-x);
+    display: grid;
+    gap: var(--space-4);
+}
+
+.nutrition-facts-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+}
+
+.nutrition-facts-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 1.2rem + 0.35vw, 1.75rem);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.01em;
+}
+
+.nutrition-facts-note {
+    margin: 0;
+    color: var(--c-muted);
+    font-size: 0.95rem;
+}
+
+.nutrition-facts-grid {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-6);
+}
+
+.nutrition-fact-item {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    min-width: 0;
+}
+
+.nutrition-fact-label {
+    margin: 0;
+    color: var(--c-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.nutrition-fact-value {
+    margin: var(--space-1) 0 0;
+    color: var(--c-text);
+    font-size: 1.35rem;
+    font-weight: var(--fw-semibold);
+    line-height: 1.15;
+}
+
+@media (max-width: 80rem) {
+    .nutrition-facts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+    }
+}
+
+@media (max-width: 40rem) {
+    .nutrition-facts-test-panel {
+        padding: var(--panel-padding-mobile);
+    }
+
+    .nutrition-facts-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+}
