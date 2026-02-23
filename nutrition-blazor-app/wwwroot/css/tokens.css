@@ -1,0 +1,100 @@
+:root {
+    /* Theme palette: edit these five values to reskin the site */
+    --theme-bg: #ececf1;
+    --theme-surface: #f3f3f6;
+    --theme-ink: #3f444f;
+    --theme-cool: #8399ca;
+    --theme-warm: #b6a48f;
+
+    /* Semantic color tokens */
+    --c-bg: var(--theme-bg);
+    --c-surface: var(--theme-surface);
+    --c-text: var(--theme-ink);
+    --c-muted: #535863;
+    --c-rule: #e1e1e6;
+    --c-accent: var(--theme-cool);
+
+    /* Data visualization colors */
+    --c-data-green: #97b690;
+    --c-data-blue: var(--theme-cool);
+    --c-data-gray: #b7b9c3;
+    --c-data-beige: var(--theme-warm);
+    --c-meter-divider: rgba(255, 255, 255, 0.55);
+
+    /* App chrome colors */
+    --c-loader-track: #e0e0e0;
+    --c-loader-fill: #1b6ec2;
+    --c-error-banner-bg: lightyellow;
+    --c-error-banner-shadow: rgba(0, 0, 0, 0.2);
+
+    /* Backward-compatible aliases used by widget color keys */
+    --page-bg: var(--c-bg);
+    --panel-bg: var(--c-surface);
+    --text-main: var(--c-text);
+    --text-muted: var(--c-muted);
+    --rule: var(--c-rule);
+    --green: var(--c-data-green);
+    --blue: var(--c-data-blue);
+    --gray: var(--c-data-gray);
+    --beige: var(--c-data-beige);
+
+    /* Typography */
+    --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    /* Spacing scale */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 2rem;
+    --space-8: 2.5rem;
+
+    /* Size and layout tokens */
+    --dashboard-max-width: 96rem;
+    --dashboard-gap: 1.1rem;
+    --macro-stack-gap: 1.4rem;
+    --page-padding: 2.4rem;
+    --page-padding-mobile: 1.1rem;
+    --panel-padding-main-y: 2.6rem;
+    --panel-padding-main-x: 2.7rem;
+    --panel-padding-pie: 2rem;
+    --panel-padding-pie-tablet: 2.3rem;
+    --panel-padding-mobile: 1.35rem;
+    --panel-padding-micro-x: 2.3rem;
+    --panel-padding-micro-y-top: 2rem;
+    --panel-padding-micro-y-bottom: 2.3rem;
+    --micro-panel-min-height: 23rem;
+    --macro-bar-height: 2.15rem;
+    --macro-bar-height-mobile: 1.75rem;
+    --micro-bar-height: 2.25rem;
+    --micro-bar-height-mobile: 1.8rem;
+    --swatch-size: 1.5rem;
+    --loading-spinner-size: 8rem;
+    --loading-spinner-stroke: 0.6rem;
+    --pie-chart-max-width: 33.75rem;
+    --pie-legend-max-width: 20rem;
+
+    /* Radius tokens */
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.28rem;
+    --radius-md: 0.45rem;
+    --radius-lg: 1.85rem;
+    --radius-round: 50%;
+
+    --radius-panel: var(--radius-lg);
+    --radius-bar: var(--radius-md);
+    --radius-swatch: var(--radius-sm);
+
+    /* Border and shadow tokens */
+    --border-meter-divider-width: 2px;
+    --shadow-panel: 0 20px 40px rgba(43, 48, 58, 0.04);
+    --shadow-error-banner: 0 -1px 2px var(--c-error-banner-shadow);
+
+    /* Backward-compatible alias */
+    --shadow: var(--shadow-panel);
+}

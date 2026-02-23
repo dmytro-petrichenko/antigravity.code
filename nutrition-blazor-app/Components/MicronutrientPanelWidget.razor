@@ -1,10 +1,10 @@
-<section class="panel micronutrient-panel" aria-label="@Title">
+<section class="panel ds-card micronutrient-panel" aria-label="@Title">
     @foreach (var item in Items)
     {
         <article class="micro-item">
             <h2 class="micro-name">@item.Name</h2>
             <p class="micro-meta">@item.Details</p>
-            <div class="micro-bar" role="img" aria-label="@BuildMicroAriaLabel(item)">
+            <div class="micro-bar ds-meter-track" role="img" aria-label="@BuildMicroAriaLabel(item)">
                 <span class="micro-fill" style="@GetWidthStyle(item.Percentage)"></span>
                 <span class="micro-rest"></span>
             </div>

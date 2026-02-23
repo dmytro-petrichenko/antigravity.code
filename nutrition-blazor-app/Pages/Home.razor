@@ -6,14 +6,14 @@
 <main class="dashboard" aria-label="Nutrition dashboard">
     <h1 class="sr-only">Nutrition dashboard</h1>
 
-    <section class="panel nutrition-panel" aria-label="Macronutrients">
+    <section class="panel ds-card nutrition-panel" aria-label="Macronutrients">
         @foreach (var macroSection in Dashboard.MacroSections)
         {
             <MacroBarWidget HeaderText="@macroSection.Header" Sections="@macroSection.Segments" />
         }
     </section>
 
-    <section class="panel macronutrient-pie-panel" aria-label="Macronutrient split">
+    <section class="panel ds-card macronutrient-pie-panel" aria-label="Macronutrient split">
         <MacronutrientPieWidget Slices="@Dashboard.MacronutrientPieSlices" />
     </section>
 

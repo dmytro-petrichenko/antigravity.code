@@ -1,3 +1,5 @@
+/* Base layer (reset + app shell). Theme and shared components live in tokens.css/components.css. */
+
 *,
 *::before,
 *::after {
@@ -11,10 +13,10 @@ body {
 }
 
 body {
-    padding: 2.4rem;
-    font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-    background: #ececf1;
-    color: #3f444f;
+    padding: var(--page-padding);
+    font-family: var(--font-sans);
+    background: var(--c-bg);
+    color: var(--c-text);
 }
 
 h1:focus {
@@ -23,9 +25,9 @@ h1:focus {
 
 #blazor-error-ui {
     color-scheme: light only;
-    background: lightyellow;
+    background: var(--c-error-banner-bg);
     bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-error-banner);
     box-sizing: border-box;
     display: none;
     left: 0;
@@ -45,22 +47,22 @@ h1:focus {
 .loading-progress {
     position: absolute;
     display: block;
-    width: 8rem;
-    height: 8rem;
+    width: var(--loading-spinner-size);
+    height: var(--loading-spinner-size);
     inset: 20vh 0 auto;
     margin: 0 auto;
 }
 
 .loading-progress circle {
     fill: none;
-    stroke: #e0e0e0;
-    stroke-width: 0.6rem;
+    stroke: var(--c-loader-track);
+    stroke-width: var(--loading-spinner-stroke);
     transform-origin: 50% 50%;
     transform: rotate(-90deg);
 }
 
 .loading-progress circle:last-child {
-    stroke: #1b6ec2;
+    stroke: var(--c-loader-fill);
     stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
     transition: stroke-dasharray 0.05s ease-in-out;
 }
@@ -78,6 +80,6 @@ h1:focus {
 
 @media (max-width: 40rem) {
     body {
-        padding: 1.1rem;
+        padding: var(--page-padding-mobile);
     }
 }

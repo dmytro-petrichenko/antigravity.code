@@ -1,22 +1,17 @@
 .macro-widget h2 {
-    margin: 0 0 1rem;
+    margin: 0 0 var(--space-4);
     font-size: clamp(2rem, 1.8rem + 0.35vw, 2.35rem);
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.01em;
 }
 
 .stacked-bar {
-    display: flex;
-    width: 100%;
-    height: 2.15rem;
-    border-radius: var(--radius-bar);
-    overflow: hidden;
-    background: var(--gray);
+    height: var(--macro-bar-height);
 }
 
 .bar-segment {
     flex: 0 0 auto;
-    border-right: 2px solid rgba(255, 255, 255, 0.55);
+    border-right: var(--border-meter-divider-width) solid var(--c-meter-divider);
 }
 
 .bar-segment:last-child {
@@ -24,67 +19,53 @@
 }
 
 .segment-green {
-    background: var(--green);
+    background: var(--c-data-green);
 }
 
 .segment-blue {
-    background: var(--blue);
+    background: var(--c-data-blue);
 }
 
 .segment-gray {
-    background: var(--gray);
+    background: var(--c-data-gray);
 }
 
 .segment-beige {
-    background: var(--beige);
+    background: var(--c-data-beige);
 }
 
 .legend-list {
-    list-style: none;
     margin: 0.9rem 0 0;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem 1.6rem;
 }
 
 .legend-item {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    color: var(--text-muted);
     font-size: clamp(1.55rem, 1.35rem + 0.1vw, 1.8rem);
     line-height: 1.25;
     max-width: 22rem;
 }
 
-.legend-swatch {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 0.28rem;
-    margin-top: 0.14rem;
-    flex-shrink: 0;
-}
-
 .swatch-green {
-    background: var(--green);
+    background: var(--c-data-green);
 }
 
 .swatch-blue {
-    background: var(--blue);
+    background: var(--c-data-blue);
 }
 
 .swatch-gray {
-    background: var(--gray);
+    background: var(--c-data-gray);
 }
 
 .swatch-beige {
-    background: var(--beige);
+    background: var(--c-data-beige);
 }
 
 @media (max-width: 40rem) {
     .stacked-bar {
-        height: 1.75rem;
+        height: var(--macro-bar-height-mobile);
     }
 
     .legend-item {

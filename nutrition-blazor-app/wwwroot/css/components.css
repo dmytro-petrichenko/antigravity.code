@@ -1,0 +1,49 @@
+/* Shared design-system components built on top of tokens.css */
+
+.ds-card {
+    background: var(--c-surface);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-panel);
+}
+
+.ds-list-reset {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ds-legend-item {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: var(--c-muted);
+    min-width: 0;
+}
+
+.ds-swatch {
+    width: var(--swatch-size);
+    height: var(--swatch-size);
+    border-radius: var(--radius-swatch);
+    margin-top: 0.14rem;
+    flex-shrink: 0;
+}
+
+.ds-meter-track {
+    --meter-radius: var(--radius-bar);
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    background: var(--c-data-gray);
+    border-radius: var(--meter-radius);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

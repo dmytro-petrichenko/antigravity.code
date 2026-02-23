@@ -2,11 +2,11 @@
     <div class="donut-chart" role="img" aria-label="@BuildMacronutrientAriaLabel()" style="@GetMacronutrientGradientStyle()"></div>
 
     <figcaption class="pie-legend">
-        <ul class="pie-legend-list">
+        <ul class="pie-legend-list ds-list-reset">
             @foreach (var slice in Slices)
             {
-                <li class="pie-legend-item">
-                    <span class="pie-legend-swatch" aria-hidden="true" style="@GetLegendSwatchStyle(slice.ColorKey)"></span>
+                <li class="pie-legend-item ds-legend-item">
+                    <span class="pie-legend-swatch ds-swatch" aria-hidden="true" style="@GetLegendSwatchStyle(slice.ColorKey)"></span>
                     <span>@slice.Label - @slice.Percentage%</span>
                 </li>
             }

@@ -1,7 +1,7 @@
 <article class="macro-widget">
     <h2>@HeaderText</h2>
 
-    <div class="stacked-bar" role="img" aria-label="@BuildAriaLabel()">
+    <div class="stacked-bar ds-meter-track" role="img" aria-label="@BuildAriaLabel()">
         @foreach (var item in Sections)
         {
             <span class="bar-segment @MacroBarWidgetLogic.GetSegmentCssClass(item.Color)"
@@ -9,11 +9,11 @@
         }
     </div>
 
-    <ul class="legend-list">
+    <ul class="legend-list ds-list-reset">
         @foreach (var item in Sections.Where(entry => entry.ShowInLegend))
         {
-            <li class="legend-item">
-                <span class="legend-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
+            <li class="legend-item ds-legend-item">
+                <span class="legend-swatch ds-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
                       aria-hidden="true"></span>
                 <span>@item.Label - @item.Amount</span>
             </li>

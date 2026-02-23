@@ -1,12 +1,6 @@
-.panel.micronutrient-panel {
-    background: var(--panel-bg);
-    border-radius: var(--radius-panel);
-    box-shadow: var(--shadow);
-}
-
 .micronutrient-panel {
-    padding: 2rem 2.3rem 2.3rem;
-    min-height: 23rem;
+    padding: var(--panel-padding-micro-y-top) var(--panel-padding-micro-x) var(--panel-padding-micro-y-bottom);
+    min-height: var(--micro-panel-min-height);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-content: start;
@@ -21,35 +15,31 @@
 .micro-name {
     margin: 0;
     font-size: clamp(1.55rem, 1.45rem + 0.2vw, 1.9rem);
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
     line-height: 1.2;
 }
 
 .micro-meta {
     margin: 0.45rem 0 0.9rem;
     font-size: clamp(1.25rem, 1.2rem + 0.1vw, 1.48rem);
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
     line-height: 1.25;
 }
 
 .micro-bar {
-    display: flex;
-    width: 100%;
-    height: 2.25rem;
-    border-radius: 0.25rem;
-    overflow: hidden;
-    background: var(--gray);
+    --meter-radius: var(--radius-xs);
+    height: var(--micro-bar-height);
 }
 
 .micro-fill {
     flex: 0 0 auto;
-    background: var(--green);
-    border-right: 2px solid rgba(255, 255, 255, 0.55);
+    background: var(--c-data-green);
+    border-right: var(--border-meter-divider-width) solid var(--c-meter-divider);
 }
 
 .micro-rest {
     flex: 1;
-    background: var(--gray);
+    background: var(--c-data-gray);
 }
 
 @media (max-width: 80rem) {
@@ -60,11 +50,11 @@
 
 @media (max-width: 40rem) {
     .micronutrient-panel {
-        padding: 1.35rem;
+        padding: var(--panel-padding-mobile);
         grid-template-columns: 1fr;
     }
 
     .micro-bar {
-        height: 1.8rem;
+        height: var(--micro-bar-height-mobile);
     }
 }

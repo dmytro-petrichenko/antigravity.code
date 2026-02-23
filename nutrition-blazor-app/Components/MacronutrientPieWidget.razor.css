@@ -6,10 +6,10 @@
 }
 
 .donut-chart {
-    width: min(100%, 33.75rem);
+    width: min(100%, var(--pie-chart-max-width));
     margin: 0 auto;
     aspect-ratio: 1 / 1;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     position: relative;
 }
 
@@ -20,39 +20,23 @@
     height: 47%;
     inset: 0;
     margin: auto;
-    border-radius: 50%;
-    background: var(--panel-bg);
+    border-radius: var(--radius-round);
+    background: var(--c-surface);
 }
 
 .pie-legend {
-    width: min(100%, 20rem);
+    width: min(100%, var(--pie-legend-max-width));
     margin: 0;
 }
 
 .pie-legend-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: grid;
     gap: 0.6rem;
 }
 
 .pie-legend-item {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    color: var(--text-muted);
     font-size: clamp(1rem, 0.95rem + 0.15vw, 1.2rem);
     line-height: 1.25;
-    min-width: 0;
-}
-
-.pie-legend-swatch {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 0.28rem;
-    margin-top: 0.14rem;
-    flex-shrink: 0;
 }
 
 @media (max-width: 40rem) {

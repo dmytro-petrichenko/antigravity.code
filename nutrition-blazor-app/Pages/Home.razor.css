@@ -1,28 +1,10 @@
 .dashboard {
-    --page-bg: #ececf1;
-    --panel-bg: #f3f3f6;
-    --text-main: #3f444f;
-    --text-muted: #535863;
-    --rule: #e1e1e6;
-    --shadow: 0 20px 40px rgba(43, 48, 58, 0.04);
-    --radius-panel: 1.85rem;
-    --radius-bar: 0.45rem;
-    --green: #97b690;
-    --blue: #8399ca;
-    --gray: #b7b9c3;
-    --beige: #b6a48f;
-    width: min(96rem, 100%);
+    width: min(var(--dashboard-max-width), 100%);
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-    gap: 1.1rem;
-    color: var(--text-main);
-}
-
-.panel {
-    background: var(--panel-bg);
-    border-radius: var(--radius-panel);
-    box-shadow: var(--shadow);
+    gap: var(--dashboard-gap);
+    color: var(--c-text);
 }
 
 .dashboard-divider {
@@ -30,37 +12,26 @@
 }
 
 .nutrition-panel {
-    padding: 2.6rem 2.7rem;
+    padding: var(--panel-padding-main-y) var(--panel-padding-main-x);
 }
 
 .nutrition-panel ::deep .macro-widget + .macro-widget {
-    margin-top: 1.4rem;
-    padding-top: 1.4rem;
+    margin-top: var(--macro-stack-gap);
+    padding-top: var(--macro-stack-gap);
     border-top: 0;
 }
 
 .macronutrient-pie-panel {
     display: grid;
     align-content: center;
-    padding: 2rem;
+    padding: var(--panel-padding-pie);
 }
 
 .micronutrient-row {
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1rem;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    gap: var(--space-4);
 }
 
 @media (max-width: 80rem) {
@@ -69,7 +40,7 @@
     }
 
     .macronutrient-pie-panel {
-        padding: 2.3rem;
+        padding: var(--panel-padding-pie-tablet);
     }
 
     .micronutrient-row {
@@ -80,6 +51,6 @@
 @media (max-width: 40rem) {
     .nutrition-panel,
     .macronutrient-pie-panel {
-        padding: 1.35rem;
+        padding: var(--panel-padding-mobile);
     }
 }
