@@ -12,11 +12,10 @@ public sealed class NutritionFactsTestWidgetTests : TestContext
 
         var panel = cut.Find("section.nutrition-facts-test-panel");
         var heading = cut.Find("h2.nutrition-facts-title");
-        var note = cut.Find("p.nutrition-facts-note");
 
         Assert.Equal("Nutrition facts test section", panel.GetAttribute("aria-label"));
         Assert.Equal("Nutrition Facts", heading.TextContent.Trim());
-        Assert.Equal("Test section", note.TextContent.Trim());
+        Assert.Empty(cut.FindAll("p.nutrition-facts-note"));
     }
 
     [Fact]

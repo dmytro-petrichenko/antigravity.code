@@ -1,30 +1,37 @@
 :root {
     /* Theme palette: edit these five values to reskin the site */
-    --theme-bg: #ececf1;
-    --theme-surface: #f3f3f6;
-    --theme-ink: #3f444f;
-    --theme-cool: #8399ca;
-    --theme-warm: #b6a48f;
+    --theme-background-bright: #F6FAF8;
+    --theme-text-dark: #1F2933;
+    --theme-accent-1: #3AA0FF;
+    --theme-accent-2: #FF9F43;
+    --theme-highlight: #4CD964;
+
+    /* Compatibility aliases + derived surface tone */
+    --theme-bg: var(--theme-background-bright);
+    --theme-surface: #FFFFFF;
+    --theme-ink: var(--theme-text-dark);
+    --theme-cool: var(--theme-accent-1);
+    --theme-warm: var(--theme-accent-2);
 
     /* Semantic color tokens */
     --c-bg: var(--theme-bg);
     --c-surface: var(--theme-surface);
     --c-text: var(--theme-ink);
-    --c-muted: #535863;
-    --c-rule: #e1e1e6;
-    --c-accent: var(--theme-cool);
+    --c-muted: #52606D;
+    --c-rule: #DDE7E1;
+    --c-accent: var(--theme-accent-1);
 
     /* Data visualization colors */
-    --c-data-green: #97b690;
-    --c-data-blue: var(--theme-cool);
-    --c-data-gray: #b7b9c3;
-    --c-data-beige: var(--theme-warm);
-    --c-meter-divider: rgba(255, 255, 255, 0.55);
+    --c-data-green: var(--theme-highlight);
+    --c-data-blue: var(--theme-accent-1);
+    --c-data-gray: #B8C8D6;
+    --c-data-beige: var(--theme-accent-2);
+    --c-meter-divider: rgba(255, 255, 255, 0.72);
 
     /* App chrome colors */
-    --c-loader-track: #e0e0e0;
-    --c-loader-fill: #1b6ec2;
-    --c-error-banner-bg: lightyellow;
+    --c-loader-track: #DDE7E1;
+    --c-loader-fill: var(--theme-accent-1);
+    --c-error-banner-bg: #FFF4EA;
     --c-error-banner-shadow: rgba(0, 0, 0, 0.2);
 
     /* Backward-compatible aliases used by widget color keys */
