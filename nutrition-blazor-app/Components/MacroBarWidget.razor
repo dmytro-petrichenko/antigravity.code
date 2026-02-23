@@ -9,13 +9,13 @@
         }
     </div>
 
-    <ul class="legend-list ds-list-reset">
-        @foreach (var item in Sections.Where(entry => entry.ShowInLegend))
+    <ul class="legend-list ds-list-reset @LegendLayoutClass">
+        @foreach (var item in _legendItems)
         {
             <li class="legend-item ds-legend-item">
                 <span class="legend-swatch ds-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
                       aria-hidden="true"></span>
-                <span>@item.Label - @item.Amount</span>
+                <span class="legend-text">@item.Label - @item.Amount</span>
             </li>
         }
     </ul>
@@ -28,16 +28,19 @@
     [Parameter, EditorRequired]
     public IReadOnlyList<NutrientSegment> Sections { get; set; } = [];
 
+    private IReadOnlyList<NutrientSegment> _legendItems = [];
+
+    private string LegendLayoutClass => _legendItems.Count <= 2 ? "legend-list-few-items" : string.Empty;
+
     protected override void OnParametersSet()
     {
         MacroBarWidgetLogic.ValidateSections(Sections);
+        _legendItems = Sections.Where(item => item.ShowInLegend).ToArray();
     }
 
     private string BuildAriaLabel()
     {
-        var parts = Sections
-            .Where(item => item.ShowInLegend)
-            .Select(item => $"{item.Label} {item.Amount}");
+        var parts = _legendItems.Select(item => $"{item.Label} {item.Amount}");
 
         return $"{HeaderText}: {string.Join(", ", parts)}";
     }

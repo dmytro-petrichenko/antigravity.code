@@ -47,6 +47,15 @@
     max-width: 22rem;
 }
 
+.legend-list-few-items .legend-item {
+    flex: 0 0 auto;
+    max-width: none;
+}
+
+.legend-list-few-items .legend-text {
+    white-space: nowrap;
+}
+
 .swatch-green {
     background: var(--c-data-green);
 }
@@ -70,5 +79,9 @@
 
     .legend-item {
         font-size: 1.25rem;
+    }
+
+    .legend-list-few-items .legend-text {
+        white-space: normal;
     }
 }
