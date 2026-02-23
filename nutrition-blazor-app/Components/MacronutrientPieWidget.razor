@@ -1,5 +1,10 @@
 <figure class="macronutrient-pie-widget">
-    <div class="donut-chart" role="img" aria-label="@BuildMacronutrientAriaLabel()" style="@GetMacronutrientGradientStyle()"></div>
+    <div class="donut-chart" role="img" aria-label="@BuildMacronutrientAriaLabel()" style="@GetMacronutrientGradientStyle()">
+        @foreach (var dividerAngle in GetDividerAngles())
+        {
+            <span class="donut-divider" aria-hidden="true" style="@GetDividerStyle(dividerAngle)"></span>
+        }
+    </div>
 
     <figcaption class="pie-legend">
         <ul class="pie-legend-list ds-list-reset">
@@ -20,16 +25,56 @@
 
     private string GetMacronutrientGradientStyle()
     {
-        var offset = 0;
+        var offset = 0.0;
         var stops = Slices.Select(slice =>
         {
             var start = offset;
             offset += slice.Percentage;
-            return $"var({GetCssVariable(slice.ColorKey)}) {start}% {offset}%";
+            return $"var({GetCssVariable(slice.ColorKey)}) {FormatCssPercent(start)}% {FormatCssPercent(offset)}%";
         });
 
         return $"background: conic-gradient({string.Join(", ", stops)});";
     }
+
+    private IEnumerable<double> GetDividerAngles()
+    {
+        if (Slices.Count <= 1)
+        {
+            yield break;
+        }
+
+        // Add a divider at the conic-gradient wrap seam (12 o'clock) so it matches other slice gaps.
+        yield return 0;
+
+        var offset = 0.0;
+        double? previousAngle = null;
+
+        for (var i = 0; i < Slices.Count - 1; i++)
+        {
+            offset += Slices[i].Percentage;
+
+            if (offset <= 0 || offset >= 100)
+            {
+                continue;
+            }
+
+            var angle = offset * 3.6;
+
+            if (previousAngle is not null && Math.Abs(angle - previousAngle.Value) < 0.001)
+            {
+                continue;
+            }
+
+            previousAngle = angle;
+            yield return angle;
+        }
+    }
+
+    private string GetDividerStyle(double angle)
+        => $"--pie-divider-angle: {FormatCssPercent(angle)}deg;";
+
+    private static string FormatCssPercent(double value)
+        => value.ToString("0.###", global::System.Globalization.CultureInfo.InvariantCulture);
 
     private static string GetCssVariable(string colorKey) => $"--{colorKey}";
 

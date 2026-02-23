@@ -39,7 +39,7 @@
     --beige: var(--c-data-beige);
 
     /* Typography */
-    --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    --font-sans: "Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --fw-medium: 500;
     --fw-semibold: 600;
     --fw-bold: 700;

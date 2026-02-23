@@ -11,6 +11,21 @@
     aspect-ratio: 1 / 1;
     border-radius: var(--radius-round);
     position: relative;
+    overflow: hidden;
+}
+
+.donut-divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(var(--border-meter-divider-width) * 1);
+    height: 50%;
+    transform-origin: 50% 100%;
+    transform: translateX(-50%) rotate(var(--pie-divider-angle, 0deg));
+    background: var(--c-meter-divider);
+    border-radius: 999px;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .donut-chart::after {
@@ -22,6 +37,7 @@
     margin: auto;
     border-radius: var(--radius-round);
     background: var(--c-surface);
+    z-index: 2;
 }
 
 .pie-legend {
