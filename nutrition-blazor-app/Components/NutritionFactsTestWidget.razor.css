@@ -2,7 +2,6 @@
     padding: var(--space-6) var(--panel-padding-main-x);
     display: grid;
     gap: var(--space-4);
-    --type-secondary-size: 0.9rem;
 }
 
 .nutrition-facts-header {

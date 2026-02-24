@@ -4,7 +4,6 @@
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
     gap: var(--dashboard-gap);
-    color: var(--c-text);
 }
 
 .dashboard-divider {
