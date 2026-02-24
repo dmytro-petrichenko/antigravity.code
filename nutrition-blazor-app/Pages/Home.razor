@@ -3,29 +3,31 @@
 
 <PageTitle>Nutrition Dashboard</PageTitle>
 
-<main class="dashboard" aria-label="Nutrition dashboard">
-    <h1 class="sr-only">Nutrition dashboard</h1>
+<RatioViewportFrame>
+    <main class="dashboard" aria-label="Nutrition dashboard">
+        <h1 class="sr-only">Nutrition dashboard</h1>
 
-    <NutritionFactsTestWidget />
+        <NutritionFactsTestWidget />
 
-    <section class="panel ds-card nutrition-panel" aria-label="Macronutrients">
-        @foreach (var macroSection in Dashboard.MacroSections)
-        {
-            <MacroBarWidget HeaderText="@macroSection.Header" Sections="@macroSection.Segments" />
-        }
-    </section>
+        <section class="panel ds-card nutrition-panel" aria-label="Macronutrients">
+            @foreach (var macroSection in Dashboard.MacroSections)
+            {
+                <MacroBarWidget HeaderText="@macroSection.Header" Sections="@macroSection.Segments" />
+            }
+        </section>
 
-    <section class="panel ds-card macronutrient-pie-panel" aria-label="Macronutrient split">
-        <MacronutrientPieWidget Slices="@Dashboard.MacronutrientPieSlices" />
-    </section>
+        <section class="panel ds-card macronutrient-pie-panel" aria-label="Macronutrient split">
+            <MacronutrientPieWidget Slices="@Dashboard.MacronutrientPieSlices" />
+        </section>
  
-    <div class="dashboard-divider" aria-hidden="true"></div>
+        <div class="dashboard-divider" aria-hidden="true"></div>
 
-    <div class="micronutrient-row">
-        <MicronutrientPanelWidget Title="Vitamins" Items="@Dashboard.Vitamins" />
-        <MicronutrientPanelWidget Title="Minerals" Items="@Dashboard.Minerals" />
-    </div>
-</main>
+        <div class="micronutrient-row">
+            <MicronutrientPanelWidget Title="Vitamins" Items="@Dashboard.Vitamins" />
+            <MicronutrientPanelWidget Title="Minerals" Items="@Dashboard.Minerals" />
+        </div>
+    </main>
+</RatioViewportFrame>
 
 @code {
     private NutritionDashboardData Dashboard = default!;

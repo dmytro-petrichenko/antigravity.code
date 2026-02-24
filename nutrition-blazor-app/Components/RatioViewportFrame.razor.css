@@ -1,0 +1,52 @@
+.ratio-viewport-shell {
+    --ratio-shell-page-padding: var(--page-padding);
+    width: 100%;
+    min-height: calc(100vh - (2 * var(--ratio-shell-page-padding)));
+    min-height: calc(100dvh - (2 * var(--ratio-shell-page-padding)));
+    display: grid;
+    justify-items: center;
+    align-items: start;
+}
+
+.ratio-viewport-frame {
+    --ratio-frame-min: 0.5;
+    --ratio-frame-max: 0.707;
+    width: 80%;
+    /* Default to the desktop cap ("pdf page" look), then clamp to viewport ratio when possible. */
+    aspect-ratio: var(--ratio-frame-max);
+    aspect-ratio: min(
+        var(--ratio-frame-max),
+        max(
+            var(--ratio-frame-min),
+            calc(
+                (100dvw - (2 * var(--ratio-shell-page-padding))) /
+                (100dvh - (2 * var(--ratio-shell-page-padding)))
+            )
+        )
+    );
+    max-width: 100%;
+    height: auto;
+    background: var(--c-bg);
+    overflow: hidden;
+    container-type: inline-size;
+    container-name: ratio-frame;
+}
+
+.ratio-viewport-frame__content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 40rem) {
+    .ratio-viewport-shell {
+        --ratio-shell-page-padding: var(--page-padding-mobile);
+    }
+}
+
+/* Intentionally no frame-width-based content overrides here by default.
+   The wrapper clamps only the visible frame ratio. Wrapped content keeps its
+   normal page behavior (viewport media queries), which preserves desktop layout
+   on wide screens and avoids forced "mobile column" rendering in portrait frames. */

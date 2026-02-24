@@ -1,0 +1,37 @@
+@using System.Globalization
+
+<div class="ratio-viewport-shell">
+    <div class="ratio-viewport-frame" style="@FrameStyle">
+        <div class="ratio-viewport-frame__content">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public double MinRatio { get; set; } = 0.5;
+
+    [Parameter]
+    public double MaxRatio { get; set; } = 0.707;
+
+    private string FrameStyle =>
+        $"--ratio-frame-min:{MinRatio.ToString(CultureInfo.InvariantCulture)};" +
+        $"--ratio-frame-max:{MaxRatio.ToString(CultureInfo.InvariantCulture)};";
+
+    protected override void OnParametersSet()
+    {
+        if (MinRatio <= 0)
+        {
+            throw new InvalidOperationException($"{nameof(MinRatio)} must be greater than 0.");
+        }
+
+        if (MaxRatio < MinRatio)
+        {
+            throw new InvalidOperationException($"{nameof(MaxRatio)} must be greater than or equal to {nameof(MinRatio)}.");
+        }
+    }
+}
