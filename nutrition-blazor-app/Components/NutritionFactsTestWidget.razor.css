@@ -3,6 +3,11 @@
     padding: var(--space-6) var(--panel-padding-main-x);
     display: grid;
     gap: var(--space-4);
+    /* Keep this panel visually stable even when the outer window width changes. */
+    --type-section-title-size: 1.5rem;
+    --type-metric-size: 1.15rem;
+    --type-label-size: 0.98rem;
+    --type-secondary-size: 0.9rem;
 }
 
 .nutrition-facts-header {
@@ -45,20 +50,5 @@
     margin: var(--space-1) 0 0;
 }
 
-@media (max-width: 80rem) {
-    .nutrition-facts-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: var(--space-4);
-    }
-}
-
-@media (max-width: 40rem) {
-    .nutrition-facts-test-panel {
-        padding: var(--panel-padding-mobile);
-    }
-
-    .nutrition-facts-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-3);
-    }
-}
+/* Intentionally no responsive collapse here: horizontal overflow is preferred
+   over changing the panel layout/typography while the frame is width-clamped. */

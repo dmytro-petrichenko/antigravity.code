@@ -34,7 +34,7 @@
     gap: var(--space-4);
 }
 
-@media (max-width: 80rem) {
+@container ratio-frame (max-width: 80rem) {
     .dashboard {
         grid-template-columns: 1fr;
     }
@@ -48,7 +48,7 @@
     }
 }
 
-@media (max-width: 40rem) {
+@container ratio-frame (max-width: 40rem) {
     .nutrition-panel,
     .macronutrient-pie-panel {
         padding: var(--panel-padding-mobile);

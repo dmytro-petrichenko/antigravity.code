@@ -4,14 +4,19 @@
     min-height: calc(100vh - (2 * var(--ratio-shell-page-padding)));
     min-height: calc(100dvh - (2 * var(--ratio-shell-page-padding)));
     display: grid;
-    justify-items: center;
+    justify-items: start;
     align-items: start;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
 }
 
 .ratio-viewport-frame {
     --ratio-frame-min: 0.5;
     --ratio-frame-max: 0.707;
     width: 100%;
+    min-width: max(100%, var(--ratio-content-min-width, 0px));
     /* Default to the desktop cap ("pdf page" look), then clamp to viewport ratio when possible. */
     aspect-ratio: var(--ratio-frame-max);
     aspect-ratio: min(
@@ -24,7 +29,7 @@
             )
         )
     );
-    max-width: 100%;
+    max-width: none;
     height: auto;
     background: var(--c-bg);
     overflow: visible;
@@ -34,9 +39,15 @@
 
 .ratio-viewport-frame__content {
     width: 100%;
+    min-width: var(--ratio-content-min-width, 0px);
     min-height: 100%;
     height: auto;
     overflow: visible;
+    /* Make typography scale with the frame (container), not the browser viewport. */
+    --type-section-title-size: clamp(1.35rem, 1.15rem + 0.55cqw, 2rem);
+    --type-metric-size: clamp(1.15rem, 1.05rem + 0.35cqw, 1.55rem);
+    --type-label-size: clamp(1rem, 0.92rem + 0.35cqw, 1.25rem);
+    --type-secondary-size: clamp(0.86rem, 0.84rem + 0.1cqw, 0.95rem);
 }
 
 @media (max-width: 40rem) {

@@ -36,13 +36,13 @@
     background: var(--c-data-gray);
 }
 
-@media (max-width: 80rem) {
+@container ratio-frame (max-width: 80rem) {
     .micronutrient-panel {
         min-height: auto;
     }
 }
 
-@media (max-width: 40rem) {
+@container ratio-frame (max-width: 40rem) {
     .micronutrient-panel {
         padding: var(--panel-padding-mobile);
         grid-template-columns: 1fr;

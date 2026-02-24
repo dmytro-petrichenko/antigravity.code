@@ -1,8 +1,11 @@
 @using System.Globalization
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject IJSRuntime JS
 
 <div class="ratio-viewport-shell">
-    <div class="ratio-viewport-frame" style="@FrameStyle">
-        <div class="ratio-viewport-frame__content">
+    <div class="ratio-viewport-frame" style="@FrameStyle" @ref="_frameRef">
+        <div class="ratio-viewport-frame__content" @ref="_contentRef">
             @ChildContent
         </div>
     </div>
@@ -18,9 +21,21 @@
     [Parameter]
     public double MaxRatio { get; set; } = 0.707;
 
+    [Parameter]
+    public bool TraceContentSizeToConsole { get; set; }
+
+    [Parameter]
+    public double MinContentWidthPx { get; set; }
+
+    private ElementReference _frameRef;
+    private ElementReference _contentRef;
+    private IJSObjectReference? _traceModule;
+    private IJSObjectReference? _traceHandle;
+
     private string FrameStyle =>
         $"--ratio-frame-min:{MinRatio.ToString(CultureInfo.InvariantCulture)};" +
-        $"--ratio-frame-max:{MaxRatio.ToString(CultureInfo.InvariantCulture)};";
+        $"--ratio-frame-max:{MaxRatio.ToString(CultureInfo.InvariantCulture)};" +
+        $"--ratio-content-min-width:{MinContentWidthPx.ToString(CultureInfo.InvariantCulture)}px;";
 
     protected override void OnParametersSet()
     {
@@ -32,6 +47,53 @@
         if (MaxRatio < MinRatio)
         {
             throw new InvalidOperationException($"{nameof(MaxRatio)} must be greater than or equal to {nameof(MinRatio)}.");
+        }
+
+        if (MinContentWidthPx < 0)
+        {
+            throw new InvalidOperationException($"{nameof(MinContentWidthPx)} must be greater than or equal to 0.");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || !TraceContentSizeToConsole)
+        {
+            return;
+        }
+
+        _traceModule = await JS.InvokeAsync<IJSObjectReference>("import", "./js/ratioViewportFrameTrace.js");
+        _traceHandle = await _traceModule.InvokeAsync<IJSObjectReference>(
+            "observeRatioViewportFrameContentSize",
+            _frameRef,
+            _contentRef);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_traceHandle is not null)
+        {
+            try
+            {
+                await _traceHandle.InvokeVoidAsync("dispose");
+                await _traceHandle.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+                // App is shutting down; no cleanup possible.
+            }
+        }
+
+        if (_traceModule is not null)
+        {
+            try
+            {
+                await _traceModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+                // App is shutting down; module disposal can be ignored.
+            }
         }
     }
 }

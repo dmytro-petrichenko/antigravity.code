@@ -67,7 +67,7 @@
     background: var(--c-data-beige);
 }
 
-@media (max-width: 40rem) {
+@container ratio-frame (max-width: 40rem) {
     .stacked-bar {
         height: var(--macro-bar-height-mobile);
     }
