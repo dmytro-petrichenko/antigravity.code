@@ -1,9 +1,7 @@
 .nutrition-facts-test-panel {
-    grid-column: 1 / -1;
     padding: var(--space-6) var(--panel-padding-main-x);
     display: grid;
     gap: var(--space-4);
-    /* Keep this panel visually stable even when the outer window width changes. */
     --type-section-title-size: 1.5rem;
     --type-metric-size: 1.15rem;
     --type-label-size: 0.98rem;

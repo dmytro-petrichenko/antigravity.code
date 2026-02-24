@@ -1,4 +1,7 @@
 .macronutrient-pie-widget {
+    --pie-widget-chart-max-inline-size: var(--pie-widget-chart-max-width, var(--pie-chart-max-width));
+    --pie-widget-legend-max-inline-size: var(--pie-widget-legend-max-width, var(--pie-legend-max-width));
+    --pie-widget-divider-width: calc(var(--border-meter-divider-width) * 1);
     margin: 0;
     display: grid;
     justify-items: center;
@@ -6,7 +9,9 @@
 }
 
 .donut-chart {
-    width: min(100%, var(--pie-chart-max-width));
+    --donut-divider-length: 50%;
+    --donut-hole-size: 47%;
+    width: min(100%, var(--pie-widget-chart-max-inline-size));
     margin: 0 auto;
     aspect-ratio: 1 / 1;
     border-radius: var(--radius-round);
@@ -18,8 +23,8 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: calc(var(--border-meter-divider-width) * 1);
-    height: 50%;
+    width: var(--pie-widget-divider-width);
+    height: var(--donut-divider-length);
     transform-origin: 50% 100%;
     transform: translateX(-50%) rotate(var(--pie-divider-angle, 0deg));
     background: var(--c-meter-divider);
@@ -31,8 +36,8 @@
 .donut-chart::after {
     content: "";
     position: absolute;
-    width: 47%;
-    height: 47%;
+    width: var(--donut-hole-size);
+    height: var(--donut-hole-size);
     inset: 0;
     margin: auto;
     border-radius: var(--radius-round);
@@ -41,7 +46,7 @@
 }
 
 .pie-legend {
-    width: min(100%, var(--pie-legend-max-width));
+    width: min(100%, var(--pie-widget-legend-max-inline-size));
     margin: 0;
 }
 

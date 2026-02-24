@@ -11,6 +11,10 @@
     display: none;
 }
 
+.dashboard > ::deep section.nutrition-facts-test-panel {
+    grid-column: 1 / -1;
+}
+
 .nutrition-panel {
     padding: var(--panel-padding-main-y) var(--panel-padding-main-x);
 }
@@ -22,6 +26,8 @@
 }
 
 .macronutrient-pie-panel {
+    --pie-widget-chart-max-width: var(--pie-chart-max-width);
+    --pie-widget-legend-max-width: var(--pie-legend-max-width);
     display: grid;
     align-content: center;
     padding: var(--panel-padding-pie);
