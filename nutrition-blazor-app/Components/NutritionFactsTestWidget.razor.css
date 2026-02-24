@@ -2,9 +2,6 @@
     padding: var(--space-6) var(--panel-padding-main-x);
     display: grid;
     gap: var(--space-4);
-    --type-section-title-size: 1.5rem;
-    --type-metric-size: 1.15rem;
-    --type-label-size: 0.98rem;
     --type-secondary-size: 0.9rem;
 }
 
