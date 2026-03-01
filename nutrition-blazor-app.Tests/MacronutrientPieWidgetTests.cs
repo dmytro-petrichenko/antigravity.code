@@ -1,6 +1,6 @@
 using Bunit;
 using nutrition_blazor_app.Components;
-using nutrition_blazor_app.Models;
+using nutrition_blazor_app.Contracts;
 
 namespace nutrition_blazor_app.Tests;
 
@@ -11,9 +11,9 @@ public sealed class MacronutrientPieWidgetTests : TestContext
     {
         var slices = new[]
         {
-            new MacronutrientPieSlice("Carbohydrates", 63, "blue"),
-            new MacronutrientPieSlice("Fats", 25, "beige"),
-            new MacronutrientPieSlice("Proteins", 12, "green")
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Carbohydrates", PercentOfCalories = 63m },
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Fats", PercentOfCalories = 25m },
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Proteins", PercentOfCalories = 12m }
         };
 
         var cut = RenderComponent<MacronutrientPieWidget>(parameters =>
@@ -38,9 +38,9 @@ public sealed class MacronutrientPieWidgetTests : TestContext
     {
         var slices = new[]
         {
-            new MacronutrientPieSlice("Carbohydrates", 60, "blue"),
-            new MacronutrientPieSlice("Fats", 25, "beige"),
-            new MacronutrientPieSlice("Proteins", 15, "green")
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Carbohydrates", PercentOfCalories = 60m },
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Fats", PercentOfCalories = 25m },
+            new NutritionDashboardDto.MacronutrientShareDto { MacronutrientName = "Proteins", PercentOfCalories = 15m }
         };
 
         var cut = RenderComponent<MacronutrientPieWidget>(parameters =>

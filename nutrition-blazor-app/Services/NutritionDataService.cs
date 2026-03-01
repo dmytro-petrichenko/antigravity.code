@@ -1,119 +1,161 @@
-using nutrition_blazor_app.Models;
+using nutrition_blazor_app.Contracts;
 
 namespace nutrition_blazor_app.Services;
 
 public interface INutritionDataService
 {
-    NutritionDashboardData GetDashboard();
+    NutritionDashboardDto GetDashboard();
 }
 
 public sealed class MockNutritionDataService : INutritionDataService
 {
-    private static readonly NutrientColor[] MacroIngredientPalette =
-    [
-        NutrientColor.Green,
-        NutrientColor.Blue,
-        NutrientColor.Beige
-    ];
+    private static readonly NutritionDashboardDto Dashboard = CreateDashboard();
 
-    private static readonly NutritionDashboardData Dashboard = CreateDashboard();
+    public NutritionDashboardDto GetDashboard() => Dashboard;
 
-    public NutritionDashboardData GetDashboard() => Dashboard;
-
-    private static NutritionDashboardData CreateDashboard()
+    private static NutritionDashboardDto CreateDashboard()
     {
-        var macroSections = new[]
+        return new NutritionDashboardDto
         {
-            new MacroSection(
-                Title: "Carbohydrates",
-                TotalAmount: "50g",
-                Segments:
-                [
-                    new NutrientSegment("Sugars", "35g", 30, NutrientColor.Green),
-                    new NutrientSegment("Starch", "10g", 40, NutrientColor.Blue),
-                    new NutrientSegment("Fiber", "5g", 30, NutrientColor.Gray)
-                ]),
-            new MacroSection(
-                Title: "Proteins",
-                TotalAmount: "10g",
-                Segments:
-                [
-                    new NutrientSegment("Amino Acid Profile (EAAs)", "35g", 70, NutrientColor.Beige),
-                    new NutrientSegment("Remaining", "15g", 30, NutrientColor.Gray, ShowInLegend: false)
-                ]),
-            new MacroSection(
-                Title: "Fats",
-                TotalAmount: "20g",
-                Segments:
-                [
-                    new NutrientSegment("Saturated", "5g", 33, NutrientColor.Green),
-                    new NutrientSegment("Monounsaturated", "10g", 30, NutrientColor.Blue),
-                    new NutrientSegment("Polyunsaturated", "5g", 37, NutrientColor.Gray)
-                ])
-        }
-        .Select(ApplyMacroSegmentColorOrder)
-        .ToArray();
-
-        return new NutritionDashboardData(
-            MacroSections: macroSections,
-            MacronutrientPieSlices:
-            [
-                new MacronutrientPieSlice("Carbohydrates", 63, "blue"),
-                new MacronutrientPieSlice("Fats", 25, "beige"),
-                new MacronutrientPieSlice("Proteins", 12, "green")
-            ],
-            Vitamins:
-            [
-                new MicronutrientItem("Vitamin A", "680 mcg RAE (76% DV)", 76),
-                new MicronutrientItem("Vitamin C", "72 mg (80% DV)", 80),
-                new MicronutrientItem("Vitamin D", "12 mcg (60% DV)", 60),
-                new MicronutrientItem("Vitamin E", "9 mg (60% DV)", 60),
-                new MicronutrientItem("Vitamin K", "58 mcg (48% DV)", 48),
-                new MicronutrientItem("Vitamin B1 (Thiamin)", "0.9 mg (75% DV)", 75),
-                new MicronutrientItem("Vitamin B2 (Riboflavin)", "1.0 mg (77% DV)", 77),
-                new MicronutrientItem("Vitamin B3 (Niacin)", "11 mg (69% DV)", 69),
-                new MicronutrientItem("Vitamin B5 (Pantothenic Acid)", "3.8 mg (76% DV)", 76),
-                new MicronutrientItem("Vitamin B6", "1.1 mg (65% DV)", 65),
-                new MicronutrientItem("Vitamin B7 (Biotin)", "26 mcg (87% DV)", 87),
-                new MicronutrientItem("Vitamin B9 (Folate)", "310 mcg DFE (78% DV)", 78),
-                new MicronutrientItem("Vitamin B12", "2.0 mcg (83% DV)", 83)
-            ],
-            Minerals:
-            [
-                new MicronutrientItem("Calcium", "420 mg (32% DV)", 32),
-                new MicronutrientItem("Phosphorus", "560 mg (45% DV)", 45),
-                new MicronutrientItem("Magnesium", "210 mg (50% DV)", 50),
-                new MicronutrientItem("Potassium", "1200 mg (26% DV)", 26),
-                new MicronutrientItem("Sodium", "430 mg (19% DV)", 19),
-                new MicronutrientItem("Chloride", "780 mg (34% DV)", 34),
-                new MicronutrientItem("Sulfur", "180 mg (demo target 44%)", 44),
-                new MicronutrientItem("Iron", "11 mg (61% DV)", 61),
-                new MicronutrientItem("Zinc", "8.4 mg (76% DV)", 76),
-                new MicronutrientItem("Copper", "0.7 mg (78% DV)", 78),
-                new MicronutrientItem("Manganese", "1.5 mg (65% DV)", 65),
-                new MicronutrientItem("Selenium", "38 mcg (69% DV)", 69),
-                new MicronutrientItem("Iodine", "96 mcg (64% DV)", 64),
-                new MicronutrientItem("Chromium", "28 mcg (80% DV)", 80),
-                new MicronutrientItem("Molybdenum", "36 mcg (80% DV)", 80),
-                new MicronutrientItem("Fluoride", "2.1 mg (53% DV)", 53)
-            ]);
-    }
-
-    private static MacroSection ApplyMacroSegmentColorOrder(MacroSection section)
-    {
-        var visibleIngredientIndex = 0;
-
-        var segments = section.Segments
-            .Select(segment =>
+            Title = "Rice",
+            Energy = new NutritionDashboardDto.EnergySummaryDto
             {
-                var color = segment.ShowInLegend
-                    ? MacroIngredientPalette[Math.Min(visibleIngredientIndex++, MacroIngredientPalette.Length - 1)]
-                    : NutrientColor.Beige;
-
-                return segment with { Color = color };
-            })
-            .ToArray();
-
-        return section with { Segments = segments };
+                Calories = Value(130m, "kcal")
+            },
+            Macronutrients = new NutritionDashboardDto.MacronutrientOverviewDto
+            {
+                Distribution =
+                [
+                    Share("Carbohydrates", 63m),
+                    Share("Fats", 25m),
+                    Share("Proteins", 12m)
+                ]
+            },
+            MacronutrientDetails =
+            [
+                Macronutrient(
+                    macronutrientName: "Carbohydrates",
+                    totalValue: 50m,
+                    totalUnit: "g",
+                    components:
+                    [
+                        Component("Sugars", 35m, "g", 30m),
+                        Component("Starch", 10m, "g", 40m),
+                        Component("Fiber", 5m, "g", 30m)
+                    ]),
+                Macronutrient(
+                    macronutrientName: "Proteins",
+                    totalValue: 10m,
+                    totalUnit: "g",
+                    components:
+                    [
+                        Component("Amino Acid Profile (EAAs)", 35m, "g", 70m),
+                        Component("Remaining", 15m, "g", 30m)
+                    ]),
+                Macronutrient(
+                    macronutrientName: "Fats",
+                    totalValue: 20m,
+                    totalUnit: "g",
+                    components:
+                    [
+                        Component("Saturated", 5m, "g", 33m),
+                        Component("Monounsaturated", 10m, "g", 30m),
+                        Component("Polyunsaturated", 5m, "g", 37m)
+                    ])
+            ],
+            Vitamins = new NutritionDashboardDto.MicronutrientGroupDto
+            {
+                GroupName = "Vitamins",
+                Items =
+                [
+                    Micronutrient("Vitamin A", 680m, "mcg RAE", 76m),
+                    Micronutrient("Vitamin C", 72m, "mg", 80m),
+                    Micronutrient("Vitamin D", 12m, "mcg", 60m),
+                    Micronutrient("Vitamin E", 9m, "mg", 60m),
+                    Micronutrient("Vitamin K", 58m, "mcg", 48m),
+                    Micronutrient("Vitamin B1 (Thiamin)", 0.9m, "mg", 75m),
+                    Micronutrient("Vitamin B2 (Riboflavin)", 1.0m, "mg", 77m),
+                    Micronutrient("Vitamin B3 (Niacin)", 11m, "mg", 69m),
+                    Micronutrient("Vitamin B5 (Pantothenic Acid)", 3.8m, "mg", 76m),
+                    Micronutrient("Vitamin B6", 1.1m, "mg", 65m),
+                    Micronutrient("Vitamin B7 (Biotin)", 26m, "mcg", 87m),
+                    Micronutrient("Vitamin B9 (Folate)", 310m, "mcg DFE", 78m),
+                    Micronutrient("Vitamin B12", 2.0m, "mcg", 83m)
+                ]
+            },
+            Minerals = new NutritionDashboardDto.MicronutrientGroupDto
+            {
+                GroupName = "Minerals",
+                Items =
+                [
+                    Micronutrient("Calcium", 420m, "mg", 32m),
+                    Micronutrient("Phosphorus", 560m, "mg", 45m),
+                    Micronutrient("Magnesium", 210m, "mg", 50m),
+                    Micronutrient("Potassium", 1200m, "mg", 26m),
+                    Micronutrient("Sodium", 430m, "mg", 19m),
+                    Micronutrient("Chloride", 780m, "mg", 34m),
+                    Micronutrient("Sulfur", 180m, "mg", 44m),
+                    Micronutrient("Iron", 11m, "mg", 61m),
+                    Micronutrient("Zinc", 8.4m, "mg", 76m),
+                    Micronutrient("Copper", 0.7m, "mg", 78m),
+                    Micronutrient("Manganese", 1.5m, "mg", 65m),
+                    Micronutrient("Selenium", 38m, "mcg", 69m),
+                    Micronutrient("Iodine", 96m, "mcg", 64m),
+                    Micronutrient("Chromium", 28m, "mcg", 80m),
+                    Micronutrient("Molybdenum", 36m, "mcg", 80m),
+                    Micronutrient("Fluoride", 2.1m, "mg", 53m)
+                ]
+            }
+        };
     }
+
+    private static NutritionDashboardDto.MacronutrientShareDto Share(string name, decimal percentOfCalories)
+        => new()
+        {
+            MacronutrientName = name,
+            PercentOfCalories = percentOfCalories
+        };
+
+    private static NutritionDashboardDto.MacronutrientDetailsDto Macronutrient(
+        string macronutrientName,
+        decimal totalValue,
+        string totalUnit,
+        IReadOnlyList<NutritionDashboardDto.MacronutrientComponentDto> components)
+        => new()
+        {
+            MacronutrientName = macronutrientName,
+            TotalAmount = Value(totalValue, totalUnit),
+            Components = components
+        };
+
+    private static NutritionDashboardDto.MacronutrientComponentDto Component(
+        string name,
+        decimal value,
+        string unit,
+        decimal percentOfParent)
+        => new()
+        {
+            Name = name,
+            Amount = Value(value, unit),
+            PercentOfParent = percentOfParent
+        };
+
+    private static NutritionDashboardDto.MicronutrientDto Micronutrient(
+        string name,
+        decimal value,
+        string unit,
+        decimal percentDailyValue)
+        => new()
+        {
+            NutrientName = name,
+            Amount = Value(value, unit),
+            PercentDailyValue = percentDailyValue
+        };
+
+    private static NutritionDashboardDto.MeasuredValueDto Value(decimal value, string unit)
+        => new()
+        {
+            Value = value,
+            Unit = unit
+        };
 }

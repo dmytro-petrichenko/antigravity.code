@@ -6,22 +6,49 @@
     <dl class="nutrition-facts-grid">
         <div class="nutrition-fact-item">
             <dt class="nutrition-fact-label ds-text-label">Product Name</dt>
-            <dd class="nutrition-fact-value ds-text-metric">Rice</dd>
+            <dd class="nutrition-fact-value ds-text-metric">@ProductName</dd>
         </div>
 
         <div class="nutrition-fact-item">
             <dt class="nutrition-fact-label ds-text-label">Portion</dt>
-            <dd class="nutrition-fact-value ds-text-metric">100 g</dd>
+            <dd class="nutrition-fact-value ds-text-metric">@PortionText</dd>
         </div>
 
         <div class="nutrition-fact-item">
             <dt class="nutrition-fact-label ds-text-label">Calories</dt>
-            <dd class="nutrition-fact-value ds-text-metric">130 kcal</dd>
+            <dd class="nutrition-fact-value ds-text-metric">@FormatMeasuredValue(Calories)</dd>
         </div>
 
         <div class="nutrition-fact-item">
             <dt class="nutrition-fact-label ds-text-label">Energy</dt>
-            <dd class="nutrition-fact-value ds-text-metric">544 kJ</dd>
+            <dd class="nutrition-fact-value ds-text-metric">@BuildEnergyText()</dd>
         </div>
     </dl>
 </section>
+
+@code {
+    [Parameter]
+    public string ProductName { get; set; } = "Rice";
+
+    [Parameter]
+    public string PortionText { get; set; } = "100 g";
+
+    [Parameter]
+    public NutritionDashboardDto.MeasuredValueDto Calories { get; set; } = new()
+    {
+        Value = 130m,
+        Unit = "kcal"
+    };
+
+    private string BuildEnergyText()
+    {
+        var kilojoules = string.Equals(Calories.Unit, "kJ", StringComparison.OrdinalIgnoreCase)
+            ? Calories.Value
+            : decimal.Round(Calories.Value * 4.184m, 0, MidpointRounding.AwayFromZero);
+
+        return $"{kilojoules:0.##} kJ";
+    }
+
+    private static string FormatMeasuredValue(NutritionDashboardDto.MeasuredValueDto value)
+        => $"{value.Value:0.##} {value.Unit}".Trim();
+}

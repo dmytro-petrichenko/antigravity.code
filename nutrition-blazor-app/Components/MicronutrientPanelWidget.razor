@@ -1,11 +1,11 @@
-<section class="panel ds-card micronutrient-panel" aria-label="@Title">
-    @foreach (var item in Items)
+<section class="panel ds-card micronutrient-panel" aria-label="@Group.GroupName">
+    @foreach (var item in Group.Items)
     {
         <article class="micro-item">
-            <h2 class="micro-name ds-text-label">@item.Name</h2>
-            <p class="micro-meta ds-text-metric">@item.Details</p>
+            <h2 class="micro-name ds-text-label">@item.NutrientName</h2>
+            <p class="micro-meta ds-text-metric">@BuildMicroDetails(item)</p>
             <div class="micro-bar ds-meter-track" role="img" aria-label="@BuildMicroAriaLabel(item)">
-                <span class="micro-fill" style="@GetWidthStyle(item.Percentage)"></span>
+                <span class="micro-fill" style="@GetWidthStyle(item.PercentDailyValue)"></span>
                 <span class="micro-rest"></span>
             </div>
         </article>
@@ -14,13 +14,17 @@
 
 @code {
     [Parameter, EditorRequired]
-    public string Title { get; set; } = string.Empty;
+    public NutritionDashboardDto.MicronutrientGroupDto Group { get; set; } = new();
 
-    [Parameter, EditorRequired]
-    public IReadOnlyList<MicronutrientItem> Items { get; set; } = [];
+    private static string GetWidthStyle(decimal percentage)
+        => $"width: {percentage.ToString("0.##", global::System.Globalization.CultureInfo.InvariantCulture)}%;";
 
-    private static string GetWidthStyle(double percentage) => $"width: {percentage:0.##}%;";
+    private static string BuildMicroAriaLabel(NutritionDashboardDto.MicronutrientDto item)
+        => $"{item.NutrientName}: {BuildMicroDetails(item)}";
 
-    private static string BuildMicroAriaLabel(MicronutrientItem item)
-        => $"{item.Name}: {item.Details}";
+    private static string BuildMicroDetails(NutritionDashboardDto.MicronutrientDto item)
+        => $"{FormatMeasuredValue(item.Amount)} ({item.PercentDailyValue.ToString("0.##", global::System.Globalization.CultureInfo.InvariantCulture)}% DV)";
+
+    private static string FormatMeasuredValue(NutritionDashboardDto.MeasuredValueDto value)
+        => $"{value.Value.ToString("0.##", global::System.Globalization.CultureInfo.InvariantCulture)} {value.Unit}".Trim();
 }

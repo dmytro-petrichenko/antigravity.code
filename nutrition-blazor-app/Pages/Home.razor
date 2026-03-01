@@ -7,33 +7,36 @@
     <main class="dashboard" aria-label="Nutrition dashboard">
         <h1 class="sr-only">Nutrition dashboard</h1>
 
-        <NutritionFactsTestWidget />
+        <NutritionFactsTestWidget ProductName="@ResolvedDashboard.Title" Calories="@ResolvedDashboard.Energy.Calories" />
 
         <section class="panel ds-card nutrition-panel" aria-label="Macronutrients">
-            @foreach (var macroSection in Dashboard.MacroSections)
+            @foreach (var macroSection in ResolvedDashboard.MacronutrientDetails)
             {
-                <MacroBarWidget HeaderText="@macroSection.Header" Sections="@macroSection.Segments" />
+                <MacroBarWidget Section="@macroSection" />
             }
         </section>
 
         <section class="panel ds-card macronutrient-pie-panel" aria-label="Macronutrient split">
-            <MacronutrientPieWidget Slices="@Dashboard.MacronutrientPieSlices" />
+            <MacronutrientPieWidget Slices="@ResolvedDashboard.Macronutrients.Distribution" />
         </section>
  
         <div class="dashboard-divider" aria-hidden="true"></div>
 
         <div class="micronutrient-row">
-            <MicronutrientPanelWidget Title="Vitamins" Items="@Dashboard.Vitamins" />
-            <MicronutrientPanelWidget Title="Minerals" Items="@Dashboard.Minerals" />
+            <MicronutrientPanelWidget Group="@ResolvedDashboard.Vitamins" />
+            <MicronutrientPanelWidget Group="@ResolvedDashboard.Minerals" />
         </div>
     </main>
 </RatioViewportFrame>
 
 @code {
-    private NutritionDashboardData Dashboard = default!;
+    [Parameter]
+    public NutritionDashboardDto? Dashboard { get; set; }
 
-    protected override void OnInitialized()
+    private NutritionDashboardDto ResolvedDashboard { get; set; } = new();
+
+    protected override void OnParametersSet()
     {
-        Dashboard = NutritionDataService.GetDashboard();
+        ResolvedDashboard = Dashboard ?? NutritionDataService.GetDashboard();
     }
 }

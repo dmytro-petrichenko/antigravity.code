@@ -11,8 +11,8 @@ public sealed class MockNutritionDataServiceTests
 
         var dashboard = service.GetDashboard();
 
-        Assert.Equal(13, dashboard.Vitamins.Count);
-        Assert.Equal(16, dashboard.Minerals.Count);
+        Assert.Equal(13, dashboard.Vitamins.Items.Count);
+        Assert.Equal(16, dashboard.Minerals.Items.Count);
     }
 
     [Fact]
@@ -23,12 +23,12 @@ public sealed class MockNutritionDataServiceTests
         var dashboard = service.GetDashboard();
 
         Assert.Equal(
-            dashboard.Vitamins.Count,
-            dashboard.Vitamins.Select(item => item.Name).Distinct(StringComparer.Ordinal).Count());
+            dashboard.Vitamins.Items.Count,
+            dashboard.Vitamins.Items.Select(item => item.NutrientName).Distinct(StringComparer.Ordinal).Count());
 
         Assert.Equal(
-            dashboard.Minerals.Count,
-            dashboard.Minerals.Select(item => item.Name).Distinct(StringComparer.Ordinal).Count());
+            dashboard.Minerals.Items.Count,
+            dashboard.Minerals.Items.Select(item => item.NutrientName).Distinct(StringComparer.Ordinal).Count());
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public sealed class MockNutritionDataServiceTests
 
         var dashboard = service.GetDashboard();
 
-        Assert.All(dashboard.Vitamins, item => Assert.InRange(item.Percentage, 0, 100));
-        Assert.All(dashboard.Minerals, item => Assert.InRange(item.Percentage, 0, 100));
+        Assert.All(dashboard.Vitamins.Items, item => Assert.InRange(item.PercentDailyValue, 0, 100));
+        Assert.All(dashboard.Minerals.Items, item => Assert.InRange(item.PercentDailyValue, 0, 100));
     }
 }

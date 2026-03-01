@@ -1,21 +1,27 @@
 <article class="macro-widget">
-    <h2 class="macro-widget-title ds-text-section-title">@HeaderText</h2>
+    <h2 class="macro-widget-title ds-text-section-title">@BuildHeaderText()</h2>
 
     <div class="stacked-bar ds-meter-track" role="img" aria-label="@BuildAriaLabel()">
-        @foreach (var item in Sections)
+        @for (var index = 0; index < Section.Components.Count; index++)
         {
-            <span class="bar-segment @MacroBarWidgetLogic.GetSegmentCssClass(item.Color)"
-                  style="@MacroBarWidgetLogic.GetWidthStyle(item.Percentage)"></span>
+            var item = Section.Components[index];
+            var colorKey = MacroBarWidgetLogic.GetColorKey(index);
+
+            <span class="bar-segment @MacroBarWidgetLogic.GetSegmentCssClass(colorKey)"
+                  style="@MacroBarWidgetLogic.GetWidthStyle(item.PercentOfParent)"></span>
         }
     </div>
 
     <ul class="legend-list ds-list-reset @LegendLayoutClass">
-        @foreach (var item in _legendItems)
+        @for (var index = 0; index < _legendItems.Count; index++)
         {
+            var item = _legendItems[index];
+            var colorKey = MacroBarWidgetLogic.GetColorKey(index);
+
             <li class="legend-item ds-legend-item ds-text-label">
-                <span class="legend-swatch ds-swatch @MacroBarWidgetLogic.GetSwatchCssClass(item.Color)"
+                <span class="legend-swatch ds-swatch @MacroBarWidgetLogic.GetSwatchCssClass(colorKey)"
                       aria-hidden="true"></span>
-                <span class="legend-text">@item.Label - @item.Amount</span>
+                <span class="legend-text">@item.Name - @FormatMeasuredValue(item.Amount)</span>
             </li>
         }
     </ul>
@@ -23,25 +29,28 @@
 
 @code {
     [Parameter, EditorRequired]
-    public string HeaderText { get; set; } = string.Empty;
+    public NutritionDashboardDto.MacronutrientDetailsDto Section { get; set; } = new();
 
-    [Parameter, EditorRequired]
-    public IReadOnlyList<NutrientSegment> Sections { get; set; } = [];
-
-    private IReadOnlyList<NutrientSegment> _legendItems = [];
+    private IReadOnlyList<NutritionDashboardDto.MacronutrientComponentDto> _legendItems = [];
 
     private string LegendLayoutClass => _legendItems.Count <= 2 ? "legend-list-few-items" : string.Empty;
 
     protected override void OnParametersSet()
     {
-        MacroBarWidgetLogic.ValidateSections(Sections);
-        _legendItems = Sections.Where(item => item.ShowInLegend).ToArray();
+        MacroBarWidgetLogic.ValidateComponents(Section.Components);
+        _legendItems = Section.Components;
     }
+
+    private string BuildHeaderText()
+        => $"{Section.MacronutrientName} - {FormatMeasuredValue(Section.TotalAmount)}";
 
     private string BuildAriaLabel()
     {
-        var parts = _legendItems.Select(item => $"{item.Label} {item.Amount}");
+        var parts = _legendItems.Select(item => $"{item.Name} {FormatMeasuredValue(item.Amount)}");
 
-        return $"{HeaderText}: {string.Join(", ", parts)}";
+        return $"{Section.MacronutrientName}: {string.Join(", ", parts)}";
     }
+
+    private static string FormatMeasuredValue(NutritionDashboardDto.MeasuredValueDto value)
+        => $"{value.Value.ToString("0.##", global::System.Globalization.CultureInfo.InvariantCulture)} {value.Unit}".Trim();
 }

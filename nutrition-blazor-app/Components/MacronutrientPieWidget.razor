@@ -8,11 +8,14 @@
 
     <figcaption class="pie-legend">
         <ul class="pie-legend-list ds-list-reset">
-            @foreach (var slice in Slices)
+            @for (var index = 0; index < Slices.Count; index++)
             {
+                var slice = Slices[index];
+                var colorKey = GetColorKey(slice.MacronutrientName, index);
+
                 <li class="pie-legend-item ds-legend-item ds-text-label">
-                    <span class="pie-legend-swatch ds-swatch" aria-hidden="true" style="@GetLegendSwatchStyle(slice.ColorKey)"></span>
-                    <span>@slice.Label - @slice.Percentage%</span>
+                    <span class="pie-legend-swatch ds-swatch" aria-hidden="true" style="@GetLegendSwatchStyle(colorKey)"></span>
+                    <span>@slice.MacronutrientName - @FormatCssPercent(slice.PercentOfCalories)%</span>
                 </li>
             }
         </ul>
@@ -21,22 +24,32 @@
 
 @code {
     [Parameter, EditorRequired]
-    public IReadOnlyList<MacronutrientPieSlice> Slices { get; set; } = [];
+    public IReadOnlyList<NutritionDashboardDto.MacronutrientShareDto> Slices { get; set; } = [];
+
+    private static readonly string[] FallbackColorOrder =
+    [
+        "blue",
+        "beige",
+        "green",
+        "gray"
+    ];
 
     private string GetMacronutrientGradientStyle()
     {
-        var offset = 0.0;
-        var stops = Slices.Select(slice =>
+        var offset = 0m;
+        var stops = Slices.Select((slice, index) =>
         {
             var start = offset;
-            offset += slice.Percentage;
-            return $"var({GetCssVariable(slice.ColorKey)}) {FormatCssPercent(start)}% {FormatCssPercent(offset)}%";
+            offset += slice.PercentOfCalories;
+            var colorKey = GetColorKey(slice.MacronutrientName, index);
+
+            return $"var({GetCssVariable(colorKey)}) {FormatCssPercent(start)}% {FormatCssPercent(offset)}%";
         });
 
         return $"background: conic-gradient({string.Join(", ", stops)});";
     }
 
-    private IEnumerable<double> GetDividerAngles()
+    private IEnumerable<decimal> GetDividerAngles()
     {
         if (Slices.Count <= 1)
         {
@@ -46,21 +59,21 @@
         // Add a divider at the conic-gradient wrap seam (12 o'clock) so it matches other slice gaps.
         yield return 0;
 
-        var offset = 0.0;
-        double? previousAngle = null;
+        var offset = 0m;
+        decimal? previousAngle = null;
 
         for (var i = 0; i < Slices.Count - 1; i++)
         {
-            offset += Slices[i].Percentage;
+            offset += Slices[i].PercentOfCalories;
 
             if (offset <= 0 || offset >= 100)
             {
                 continue;
             }
 
-            var angle = offset * 3.6;
+            var angle = offset * 3.6m;
 
-            if (previousAngle is not null && Math.Abs(angle - previousAngle.Value) < 0.001)
+            if (previousAngle is not null && Math.Abs(angle - previousAngle.Value) < 0.001m)
             {
                 continue;
             }
@@ -70,10 +83,10 @@
         }
     }
 
-    private string GetDividerStyle(double angle)
+    private string GetDividerStyle(decimal angle)
         => $"--pie-divider-angle: {FormatCssPercent(angle)}deg;";
 
-    private static string FormatCssPercent(double value)
+    private static string FormatCssPercent(decimal value)
         => value.ToString("0.###", global::System.Globalization.CultureInfo.InvariantCulture);
 
     private static string GetCssVariable(string colorKey) => $"--{colorKey}";
@@ -82,7 +95,27 @@
 
     private string BuildMacronutrientAriaLabel()
     {
-        var parts = Slices.Select(slice => $"{slice.Label} {slice.Percentage} percent");
+        var parts = Slices.Select(slice => $"{slice.MacronutrientName} {FormatCssPercent(slice.PercentOfCalories)} percent");
         return $"Macronutrient distribution: {string.Join(", ", parts)}";
+    }
+
+    private static string GetColorKey(string macronutrientName, int index)
+    {
+        if (macronutrientName.Contains("carb", StringComparison.OrdinalIgnoreCase))
+        {
+            return "blue";
+        }
+
+        if (macronutrientName.Contains("fat", StringComparison.OrdinalIgnoreCase))
+        {
+            return "beige";
+        }
+
+        if (macronutrientName.Contains("protein", StringComparison.OrdinalIgnoreCase))
+        {
+            return "green";
+        }
+
+        return FallbackColorOrder[index % FallbackColorOrder.Length];
     }
 }

@@ -1,6 +1,6 @@
 using Bunit;
 using nutrition_blazor_app.Components;
-using nutrition_blazor_app.Models;
+using nutrition_blazor_app.Contracts;
 
 namespace nutrition_blazor_app.Tests;
 
@@ -11,13 +11,27 @@ public sealed class MicronutrientPanelWidgetTests : TestContext
     {
         var items = new[]
         {
-            new MicronutrientItem("Vitamin A", "680 mcg RAE (76% DV)", 76),
-            new MicronutrientItem("Vitamin C", "72 mg (80% DV)", 80)
+            new NutritionDashboardDto.MicronutrientDto
+            {
+                NutrientName = "Vitamin A",
+                Amount = new NutritionDashboardDto.MeasuredValueDto { Value = 680m, Unit = "mcg RAE" },
+                PercentDailyValue = 76m
+            },
+            new NutritionDashboardDto.MicronutrientDto
+            {
+                NutrientName = "Vitamin C",
+                Amount = new NutritionDashboardDto.MeasuredValueDto { Value = 72m, Unit = "mg" },
+                PercentDailyValue = 80m
+            }
+        };
+        var group = new NutritionDashboardDto.MicronutrientGroupDto
+        {
+            GroupName = "Vitamins",
+            Items = items
         };
 
         var cut = RenderComponent<MicronutrientPanelWidget>(parameters => parameters
-            .Add(component => component.Title, "Vitamins")
-            .Add(component => component.Items, items));
+            .Add(component => component.Group, group));
 
         var panel = cut.Find("section.micronutrient-panel");
         var entries = cut.FindAll("article.micro-item");
@@ -40,12 +54,21 @@ public sealed class MicronutrientPanelWidgetTests : TestContext
     {
         var items = new[]
         {
-            new MicronutrientItem("Demo Mineral", "123 mg (62.35% DV)", 62.345)
+            new NutritionDashboardDto.MicronutrientDto
+            {
+                NutrientName = "Demo Mineral",
+                Amount = new NutritionDashboardDto.MeasuredValueDto { Value = 123m, Unit = "mg" },
+                PercentDailyValue = 62.345m
+            }
+        };
+        var group = new NutritionDashboardDto.MicronutrientGroupDto
+        {
+            GroupName = "Minerals",
+            Items = items
         };
 
         var cut = RenderComponent<MicronutrientPanelWidget>(parameters => parameters
-            .Add(component => component.Title, "Minerals")
-            .Add(component => component.Items, items));
+            .Add(component => component.Group, group));
 
         var fill = cut.Find("span.micro-fill");
 

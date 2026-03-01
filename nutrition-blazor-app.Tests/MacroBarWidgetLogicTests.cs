@@ -1,82 +1,95 @@
 using nutrition_blazor_app.Components;
-using nutrition_blazor_app.Models;
+using nutrition_blazor_app.Contracts;
 
 namespace nutrition_blazor_app.Tests;
 
 public class MacroBarWidgetLogicTests
 {
     [Theory]
-    [InlineData(NutrientColor.Green, "segment-green", "swatch-green")]
-    [InlineData(NutrientColor.Blue, "segment-blue", "swatch-blue")]
-    [InlineData(NutrientColor.Gray, "segment-gray", "swatch-gray")]
-    [InlineData(NutrientColor.Beige, "segment-beige", "swatch-beige")]
+    [InlineData(0, "segment-green", "swatch-green")]
+    [InlineData(1, "segment-blue", "swatch-blue")]
+    [InlineData(2, "segment-beige", "swatch-beige")]
+    [InlineData(3, "segment-beige", "swatch-beige")]
     public void ColorClassMapping_ReturnsExpectedCssClasses(
-        NutrientColor color,
+        int componentIndex,
         string expectedSegmentClass,
         string expectedSwatchClass)
     {
-        var segmentClass = MacroBarWidgetLogic.GetSegmentCssClass(color);
-        var swatchClass = MacroBarWidgetLogic.GetSwatchCssClass(color);
+        var colorKey = MacroBarWidgetLogic.GetColorKey(componentIndex);
+        var segmentClass = MacroBarWidgetLogic.GetSegmentCssClass(colorKey);
+        var swatchClass = MacroBarWidgetLogic.GetSwatchCssClass(colorKey);
 
         Assert.Equal(expectedSegmentClass, segmentClass);
         Assert.Equal(expectedSwatchClass, swatchClass);
     }
 
     [Fact]
-    public void ValidateSections_AllowsTwoSectionsSummingToHundred()
+    public void ValidateComponents_AllowsTwoSectionsSummingToHundred()
     {
-        var sections = new[]
+        var components = new[]
         {
-            new NutrientSegment("A", "10g", 10, NutrientColor.Green),
-            new NutrientSegment("B", "90g", 90, NutrientColor.Gray)
+            Component("A", 10m),
+            Component("B", 90m)
         };
 
-        MacroBarWidgetLogic.ValidateSections(sections);
+        MacroBarWidgetLogic.ValidateComponents(components);
     }
 
     [Fact]
-    public void ValidateSections_AllowsThreeSectionsSummingToHundred()
+    public void ValidateComponents_AllowsThreeSectionsSummingToHundred()
     {
-        var sections = new[]
+        var components = new[]
         {
-            new NutrientSegment("A", "30g", 30, NutrientColor.Green),
-            new NutrientSegment("B", "40g", 40, NutrientColor.Blue),
-            new NutrientSegment("C", "30g", 30, NutrientColor.Gray)
+            Component("A", 30m),
+            Component("B", 40m),
+            Component("C", 30m)
         };
 
-        MacroBarWidgetLogic.ValidateSections(sections);
+        MacroBarWidgetLogic.ValidateComponents(components);
     }
 
     [Fact]
-    public void ValidateSections_ThrowsWhenSectionCountOutsideAllowedRange()
+    public void ValidateComponents_ThrowsWhenSectionCountOutsideAllowedRange()
     {
-        var singleSection = new[]
+        var singleComponent = new[]
         {
-            new NutrientSegment("A", "100g", 100, NutrientColor.Green)
+            Component("A", 100m)
         };
 
-        var tooManySections = new[]
+        var tooManyComponents = new[]
         {
-            new NutrientSegment("A", "25g", 25, NutrientColor.Green),
-            new NutrientSegment("B", "25g", 25, NutrientColor.Blue),
-            new NutrientSegment("C", "25g", 25, NutrientColor.Gray),
-            new NutrientSegment("D", "25g", 25, NutrientColor.Beige)
+            Component("A", 25m),
+            Component("B", 25m),
+            Component("C", 25m),
+            Component("D", 25m)
         };
 
-        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateSections(singleSection));
-        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateSections(tooManySections));
+        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateComponents(singleComponent));
+        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateComponents(tooManyComponents));
     }
 
     [Fact]
-    public void ValidateSections_ThrowsWhenTotalPercentageIsNotHundred()
+    public void ValidateComponents_ThrowsWhenTotalPercentageIsNotHundred()
     {
-        var sections = new[]
+        var components = new[]
         {
-            new NutrientSegment("A", "35g", 35, NutrientColor.Green),
-            new NutrientSegment("B", "35g", 35, NutrientColor.Blue),
-            new NutrientSegment("C", "20g", 20, NutrientColor.Gray)
+            Component("A", 35m),
+            Component("B", 35m),
+            Component("C", 20m)
         };
 
-        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateSections(sections));
+        Assert.Throws<InvalidOperationException>(() => MacroBarWidgetLogic.ValidateComponents(components));
     }
+
+    private static NutritionDashboardDto.MacronutrientComponentDto Component(string name, decimal percentOfParent)
+        => new()
+        {
+            Name = name,
+            Amount = new NutritionDashboardDto.MeasuredValueDto
+            {
+                Value = 1m,
+                Unit = "g"
+            },
+            PercentOfParent = percentOfParent
+        };
 }
