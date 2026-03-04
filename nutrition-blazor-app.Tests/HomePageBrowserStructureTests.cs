@@ -58,7 +58,7 @@ public sealed class HomePageBrowserStructureTests
             }
         };
 
-        await page.GotoAsync(host.BaseUrl, new PageGotoOptions
+        await page.GotoAsync($"{host.BaseUrl}/home", new PageGotoOptions
         {
             WaitUntil = WaitUntilState.DOMContentLoaded
         });
