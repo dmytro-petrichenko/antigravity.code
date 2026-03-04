@@ -1,0 +1,11 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<PageTitle>Redirecting</PageTitle>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("/search", replace: true);
+    }
+}

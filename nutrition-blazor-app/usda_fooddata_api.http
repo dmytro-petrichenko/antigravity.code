@@ -1,0 +1,86 @@
+@apiKey = 6AWaRCviOJLOGw9BWfd7q478ViWdNXoAh4knRup5
+@baseUrl = https://api.nal.usda.gov/fdc/v1
+
+### Get Food Details by FDC ID (GET)
+# Retrieves detailed information for a specific food using its FDC ID.
+# Example ID: 1105904 (Apples, raw, with skin - Foundation Food)
+# Documentation: https://fdc.nal.usda.gov/api-guide.html#food-details-endpoint
+GET {{baseUrl}}/food/1105904?api_key={{apiKey}}&format=full
+Accept: application/json
+
+###
+
+### Get Multiple Foods by FDC IDs (GET)
+# Retrieves detailed information for multiple FDC IDs using a GET request.
+# These IDs correspond to Foundation Foods.
+GET {{baseUrl}}/foods?api_key={{apiKey}}&fdcIds=1105904,1105898&format=abridged
+Accept: application/json
+
+###
+
+### Get Multiple Foods by FDC IDs (POST)
+# Retrieves detailed information for multiple FDC IDs using a POST request.
+POST {{baseUrl}}/foods?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "fdcIds": [1105904, 1105898],
+  "format": "abridged"
+}
+
+###
+
+### Get Food List (GET)
+# Retrieves a paged list of foods. Filtered to "Foundation" data type and searching for "raw".
+# Documentation: https://fdc.nal.usda.gov/api-guide.html#food-list-endpoint
+GET {{baseUrl}}/foods/list?api_key={{apiKey}}&dataType=Foundation&pageSize=5&pageNumber=1
+Accept: application/json
+
+###
+
+### Get Food List (POST)
+# Retrieves a paged list of foods using a POST request, specifically filtering for Foundation foods.
+POST {{baseUrl}}/foods/list?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "dataType": ["Foundation"],
+  "pageSize": 5,
+  "pageNumber": 1
+}
+
+###
+
+### Search Foods (GET)
+# Search foods using a simple query string, specifically requesting "raw" and filtering for Foundation foods.
+# Documentation: https://fdc.nal.usda.gov/api-guide.html#food-search-endpoint
+GET {{baseUrl}}/foods/search?api_key={{apiKey}}&query=raw&dataType=Foundation&pageSize=5
+Accept: application/json
+
+###
+
+### Search Foods (POST)
+# Search foods using advanced criteria via a POST request, searching for "raw apple" and filtering for Foundation foods.
+POST {{baseUrl}}/foods/search?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "raw",
+  "dataType": [
+    "Foundation"
+  ],
+  "pageSize": 5,
+  "pageNumber": 1,
+  "sortBy": "dataType.keyword",
+  "sortOrder": "asc"
+}
+
+###
+
+### Get OpenAPI v3 Spec (JSON)
+# Retrieves the OpenAPI specification for the FDC API endpoints.
+GET https://api.nal.usda.gov/fdc/api-spec/fdc_api.json
+Accept: application/json
