@@ -116,6 +116,101 @@ public sealed class HomePageBrowserStructureTests
         Assert.True(donutChartBounds.Height > 100);
     }
 
+    [Fact]
+    public async Task SearchPage_ExposesExpectedSearchShell()
+    {
+        await using var host = await HomePageKestrelHost.StartAsync();
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        await using var context = await browser.NewContextAsync(new BrowserNewContextOptions
+        {
+            ViewportSize = new ViewportSize
+            {
+                Width = 1440,
+                Height = 900
+            }
+        });
+        var page = await context.NewPageAsync();
+        var consoleMessages = new ConcurrentQueue<string>();
+        var requestFailures = new ConcurrentQueue<string>();
+        var errorResponses = new ConcurrentQueue<string>();
+        var pageErrors = new ConcurrentQueue<string>();
+
+        page.Console += (_, message) =>
+        {
+            if (message.Type is "error" or "warning")
+            {
+                consoleMessages.Enqueue($"{message.Type}: {message.Text}");
+            }
+        };
+        page.PageError += (_, exception) =>
+        {
+            pageErrors.Enqueue(exception);
+        };
+        page.RequestFailed += (_, request) =>
+        {
+            requestFailures.Enqueue($"{request.Method} {request.Url} :: {request.Failure}");
+        };
+        page.Response += (_, response) =>
+        {
+            if (response.Status >= 400)
+            {
+                errorResponses.Enqueue($"{response.Status} {response.Request.Method} {response.Url}");
+            }
+        };
+
+        await page.GotoAsync($"{host.BaseUrl}/search", new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.DOMContentLoaded
+        });
+
+        try
+        {
+            await page.WaitForSelectorAsync(".search-shell__row", new PageWaitForSelectorOptions
+            {
+                Timeout = 15_000
+            });
+        }
+        catch (TimeoutException ex)
+        {
+            var html = await page.ContentAsync();
+            var diagnostics = string.Join(Environment.NewLine, new[]
+            {
+                $"URL: {page.Url}",
+                $"Console: {string.Join(" | ", consoleMessages)}",
+                $"PageErrors: {string.Join(" | ", pageErrors)}",
+                $"RequestFailed: {string.Join(" | ", requestFailures)}",
+                $"ErrorResponses: {string.Join(" | ", errorResponses)}",
+                $"HTML: {html}"
+            });
+
+            throw new Xunit.Sdk.XunitException($"Blazor app did not render search shell.{Environment.NewLine}{diagnostics}", ex);
+        }
+
+        var searchMain = page.Locator("main.search-page");
+        Assert.Equal(1, await searchMain.CountAsync());
+        Assert.Equal("Search page", await searchMain.GetAttributeAsync("aria-label"));
+
+        var searchInput = page.Locator("input.search-shell__input");
+        Assert.Equal(1, await searchInput.CountAsync());
+        Assert.Equal("Search for any food...", await searchInput.GetAttributeAsync("placeholder"));
+
+        var searchButton = page.Locator("button.search-shell__button");
+        Assert.Equal(1, await searchButton.CountAsync());
+        Assert.Equal("Search", (await searchButton.TextContentAsync())?.Trim());
+
+        Assert.Equal(1, await page.Locator("section.search-shell").CountAsync());
+        Assert.Equal(1, await page.Locator("section.search-shell .search-shell__glow").CountAsync());
+
+        Assert.Empty(pageErrors);
+        Assert.Empty(requestFailures);
+        Assert.Empty(errorResponses);
+    }
+
     private sealed class HomePageKestrelHost : IAsyncDisposable
     {
         private readonly WebApplication _app;

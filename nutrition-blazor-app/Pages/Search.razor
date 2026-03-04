@@ -2,7 +2,27 @@
 
 <PageTitle>Search</PageTitle>
 
-<main>
-    <h1>search</h1>
-    <p>This page search</p>
+<main class="search-page" aria-label="Search page">
+    <h1 class="sr-only">Search</h1>
+
+    <section class="search-shell" aria-label="Food search">
+        <div class="search-shell__glow" aria-hidden="true"></div>
+
+        <div class="search-shell__inner">
+            <div class="search-shell__row">
+                <svg class="search-shell__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.3-4.3"></path>
+                </svg>
+
+                <input
+                    class="search-shell__input"
+                    type="text"
+                    placeholder="Search for any food..."
+                    aria-label="Search for food" />
+
+                <button class="search-shell__button" type="button">Search</button>
+            </div>
+        </div>
+    </section>
 </main>
