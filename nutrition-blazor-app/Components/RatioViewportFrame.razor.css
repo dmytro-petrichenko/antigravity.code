@@ -17,7 +17,6 @@
     --ratio-frame-max: 0.707;
     width: 100%;
     min-width: max(100%, var(--ratio-content-min-width, 0px));
-    /* Default to the desktop cap ("pdf page" look), then clamp to viewport ratio when possible. */
     aspect-ratio: var(--ratio-frame-max);
     aspect-ratio: min(
         var(--ratio-frame-max),
@@ -35,6 +34,7 @@
     overflow: visible;
     container-type: inline-size;
     container-name: ratio-frame;
+    position: relative;
 }
 
 .ratio-viewport-frame__content {
@@ -43,6 +43,7 @@
     min-height: 100%;
     height: auto;
     overflow: visible;
+    position: relative;
     /* Make typography scale with the frame (container), not the browser viewport. */
     --type-section-title-size: clamp(1.35rem, 1.15rem + 0.55cqw, 2rem);
     --type-metric-size: clamp(1.15rem, 1.05rem + 0.35cqw, 1.55rem);
@@ -55,8 +56,3 @@
         --ratio-shell-page-padding: var(--page-padding-mobile);
     }
 }
-
-/* Intentionally no frame-width-based content overrides here by default.
-   The wrapper clamps only the visible frame ratio. Wrapped content keeps its
-   normal page behavior (viewport media queries), which preserves desktop layout
-   on wide screens and avoids forced "mobile column" rendering in portrait frames. */

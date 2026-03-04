@@ -52,23 +52,23 @@
     --fw-bold: 700;
 
     /* Page typography roles (4 shared text styles) */
-    --type-section-title-size: clamp(1.35rem, 1.15rem + 0.55vw, 2rem);
+    --type-section-title-size: 1.6rem;
     --type-section-title-weight: var(--fw-semibold);
     --type-section-title-line-height: 1.2;
     --type-section-title-letter-spacing: 0.01em;
     --type-section-title-color: var(--c-text);
 
-    --type-metric-size: clamp(1.15rem, 1.05rem + 0.35vw, 1.55rem);
+    --type-metric-size: 1.3rem;
     --type-metric-weight: var(--fw-semibold);
     --type-metric-line-height: 1.2;
     --type-metric-color: var(--c-text);
 
-    --type-label-size: clamp(1rem, 0.92rem + 0.35vw, 1.25rem);
+    --type-label-size: 1.08rem;
     --type-label-weight: var(--fw-medium);
     --type-label-line-height: 1.25;
     --type-label-color: var(--c-muted);
 
-    --type-secondary-size: clamp(0.86rem, 0.84rem + 0.1vw, 0.95rem);
+    --type-secondary-size: 0.92rem;
     --type-secondary-weight: 400;
     --type-secondary-line-height: 1.25;
     --type-secondary-color: var(--c-muted);
