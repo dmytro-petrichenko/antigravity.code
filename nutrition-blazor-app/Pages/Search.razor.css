@@ -8,24 +8,19 @@
 }
 
 .search-shell {
-    position: relative;
     width: min(64rem, 100%);
-}
-
-.search-shell__glow {
-    position: absolute;
-    inset: -0.19rem;
     border-radius: 1rem;
-    background: linear-gradient(90deg, #ef4444 0%, #f97316 50%, #8b5cf6 100%);
-    filter: blur(0.2rem);
-    opacity: 0.95;
-    pointer-events: none;
+    padding: 0.25rem; /* border thickness */
+    background: linear-gradient(
+            90deg,
+            rgba(239, 68, 68, 0.9) 0%,
+            rgba(249, 115, 22, 0.9) 50%,
+            rgba(139, 92, 246, 0.9) 100%
+    );
 }
 
 .search-shell__inner {
-    position: relative;
-    border-radius: 1rem;
-    padding: 0.25rem;
+    border-radius: calc(1rem - 0.25rem);
     background: var(--c-surface);
 }
 
