@@ -1,7 +1,8 @@
 @apiKey = 6AWaRCviOJLOGw9BWfd7q478ViWdNXoAh4knRup5
 @baseUrl = https://api.nal.usda.gov/fdc/v1
-@foodName = rice white
-# 2512381 rice id
+@foodName = sunflower
+# 2512381 rice white id
+# 1750349
 
 ###
 
@@ -17,7 +18,7 @@ Accept: application/json
 
 {
   "fdcIds": [2512381],
-  "format": "abridged"  
+  "format": "full"  
 }
 
 ###
