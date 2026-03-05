@@ -57,3 +57,4 @@ nunit-*.xml
 *.user
 .nuke/temp
 src/AppHost/appsettings.Production.json
+.DS_Store
