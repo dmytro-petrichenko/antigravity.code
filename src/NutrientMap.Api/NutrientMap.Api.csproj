@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../NutrientMap.Application/NutrientMap.Application.csproj" />
+    <ProjectReference Include="../NutrientMap.Infrastructure/NutrientMap.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
