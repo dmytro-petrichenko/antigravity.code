@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutrientMap.Domain", "src\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutrientMap.Api.Tests", "tests\NutrientMap.Api.Tests\NutrientMap.Api.Tests.csproj", "{E6C031AE-EF30-410F-8BED-10B9A99E8758}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutrientMap.Infrastructure.Tests", "tests\NutrientMap.Infrastructure.Tests\NutrientMap.Infrastructure.Tests.csproj", "{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{E6C031AE-EF30-410F-8BED-10B9A99E8758}.Release|x64.Build.0 = Release|Any CPU
 		{E6C031AE-EF30-410F-8BED-10B9A99E8758}.Release|x86.ActiveCfg = Release|Any CPU
 		{E6C031AE-EF30-410F-8BED-10B9A99E8758}.Release|x86.Build.0 = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|x64.Build.0 = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Debug|x86.Build.0 = Debug|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|x64.ActiveCfg = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|x64.Build.0 = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0A1595D-29D2-4F67-9E1C-38FAE2F6A34A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

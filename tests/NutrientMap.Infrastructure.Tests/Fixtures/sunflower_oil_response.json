@@ -1,0 +1,35 @@
+[
+  {
+    "fdcId": 1750349,
+    "description": "Oil, sunflower",
+    "dataType": "Foundation",
+    "publicationDate": "2021-04-28",
+    "ndbNumber": "100262",
+    "foodNutrients": [
+      {
+        "number": "631",
+        "name": "PUFA 22:5 n-3 (DPA)",
+        "amount": 0E-8,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "",
+        "name": "Delta-7-Stigmastenol",
+        "amount": 59.1,
+        "unitName": "MG",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "641",
+        "name": "Beta-sitosterol",
+        "amount": 205,
+        "unitName": "MG",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      }
+    ]
+  }
+]

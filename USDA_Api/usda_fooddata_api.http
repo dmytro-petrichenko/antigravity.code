@@ -1,0 +1,70 @@
+@apiKey = 6AWaRCviOJLOGw9BWfd7q478ViWdNXoAh4knRup5
+@baseUrl = https://api.nal.usda.gov/fdc/v1
+@foodName = sunflower
+# 2512381 rice white id
+# 1750349
+
+###
+
+### Get Multiple Foods by FDC IDs (POST)
+# Retrieves detailed information for multiple FDC IDs using a POST request.
+# Query param "api_key": string
+# "fdcIds": [integer] (required, 1-20 items)
+# "format": "abridged", "full"
+# "nutrients": [integer] (optional, 1-25 items)
+POST {{baseUrl}}/foods?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "fdcIds": [2512381],
+  "format": "full"  
+}
+
+###
+
+### Get Food List (POST)
+# Retrieves a paged list of foods using a POST request, specifically filtering for Foundation foods.
+# Query param "api_key": string
+# "dataType": ["Branded", "Foundation", "Survey (FNDDS)", "SR Legacy"]
+# "pageSize": 1-200
+# "pageNumber": integer
+# "sortBy": "dataType.keyword", "lowercaseDescription.keyword", "fdcId", "publishedDate"
+# "sortOrder": "asc", "desc"
+POST {{baseUrl}}/foods/list?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "dataType": ["Foundation"],
+  "pageSize": 5,
+  "pageNumber": 1
+}
+
+###
+
+### Search Foods (POST)
+# Search foods using advanced criteria via a POST request.
+# The food name is passed through the {{foodName}} variable.
+# Query param "api_key": string
+# "query": string
+# "dataType": ["Branded", "Foundation", "Survey (FNDDS)", "SR Legacy"]
+# "pageSize": 1-200
+# "pageNumber": integer
+# "sortBy": "dataType.keyword", "lowercaseDescription.keyword", "fdcId", "publishedDate"
+# "sortOrder": "asc", "desc"
+# "brandOwner": string
+POST {{baseUrl}}/foods/search?api_key={{apiKey}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{{foodName}}",
+  "dataType": [
+    "Foundation"
+  ],
+  "pageSize": 5,
+  "pageNumber": 1,
+  "sortBy": "dataType.keyword",
+  "sortOrder": "asc"
+}
