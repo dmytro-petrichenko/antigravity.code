@@ -1,7 +1,7 @@
-using nutrition_blazor_app.Components;
-using nutrition_blazor_app.Contracts;
+using NutrientMap.Api.Components;
+using NutrientMap.Domain.Contracts;
 
-namespace nutrition_blazor_app.Tests;
+namespace NutrientMap.Api.Tests;
 
 public class MacroBarWidgetLogicTests
 {

@@ -1,6 +1,6 @@
-using nutrition_blazor_app.Services;
+using NutrientMap.Application.Services;
 
-namespace nutrition_blazor_app.Tests;
+namespace NutrientMap.Api.Tests;
 
 public sealed class MockNutritionDataServiceTests
 {

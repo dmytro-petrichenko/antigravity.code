@@ -1,7 +1,7 @@
 using Bunit;
-using nutrition_blazor_app.Components;
+using NutrientMap.Api.Components;
 
-namespace nutrition_blazor_app.Tests;
+namespace NutrientMap.Api.Tests;
 
 public sealed class NutritionFactsTestWidgetTests : TestContext
 {

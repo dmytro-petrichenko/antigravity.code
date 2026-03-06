@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>nutrition_blazor_app.Tests</RootNamespace>
+    <RootNamespace>NutrientMap.Api.Tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../nutrition-blazor-app/nutrition-blazor-app.csproj" />
+    <ProjectReference Include="../../src/NutrientMap.Api/NutrientMap.Api.csproj" />
   </ItemGroup>
 
 </Project>

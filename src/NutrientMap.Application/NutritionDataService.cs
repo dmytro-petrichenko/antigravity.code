@@ -1,6 +1,6 @@
-using nutrition_blazor_app.Contracts;
+using NutrientMap.Domain.Contracts;
 
-namespace nutrition_blazor_app.Services;
+namespace NutrientMap.Application.Services;
 
 public interface INutritionDataService
 {

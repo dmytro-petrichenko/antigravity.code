@@ -1,8 +1,8 @@
 @apiKey = 6AWaRCviOJLOGw9BWfd7q478ViWdNXoAh4knRup5
 @baseUrl = https://api.nal.usda.gov/fdc/v1
-@foodName = sunflower
-# 2512381 rice white id
-# 1750349
+@foodName = rice white
+# 2512381 rice white id . 
+# 1750349 sunflower oil
 
 ###
 
@@ -18,7 +18,7 @@ Accept: application/json
 
 {
   "fdcIds": [2512381],
-  "format": "full"  
+  "format": "abridged"  
 }
 
 ###
@@ -43,6 +43,7 @@ Accept: application/json
 
 ###
 
+
 ### Search Foods (POST)
 # Search foods using advanced criteria via a POST request.
 # The food name is passed through the {{foodName}} variable.
@@ -66,5 +67,10 @@ Accept: application/json
   "pageSize": 5,
   "pageNumber": 1,
   "sortBy": "dataType.keyword",
-  "sortOrder": "asc"
+  "sortOrder": "asc",
+  "startDate": "2021-01-01"
 }
+
+###
+
+GET {{baseUrl}}/food/{{fdcId}}?api_key={{apiKey}}&format=abridged&nutrients=204&nutrients=606

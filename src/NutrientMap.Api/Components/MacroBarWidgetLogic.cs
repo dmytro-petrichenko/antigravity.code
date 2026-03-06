@@ -1,7 +1,7 @@
 using System.Globalization;
-using nutrition_blazor_app.Contracts;
+using NutrientMap.Domain.Contracts;
 
-namespace nutrition_blazor_app.Components;
+namespace NutrientMap.Api.Components;
 
 public static class MacroBarWidgetLogic
 {

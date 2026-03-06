@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Playwright;
 
-namespace nutrition_blazor_app.Tests;
+namespace NutrientMap.Api.Tests;
 
 public sealed class HomePageBrowserStructureTests
 {
@@ -68,6 +68,13 @@ public sealed class HomePageBrowserStructureTests
             {
                 Timeout = 15_000
             });
+            await page.WaitForFunctionAsync(
+                "() => document.querySelector('main.dashboard') && getComputedStyle(document.querySelector('main.dashboard')).display === 'grid'",
+                null,
+                new PageWaitForFunctionOptions
+                {
+                    Timeout = 15_000
+                });
         }
         catch (TimeoutException ex)
         {
@@ -275,11 +282,13 @@ public sealed class HomePageBrowserStructureTests
                 "..",
                 "..",
                 "..",
-                "nutrition-blazor-app",
+                "..",
+                "src",
+                "NutrientMap.Api",
                 "bin",
                 "Debug",
                 "net10.0",
-                "nutrition-blazor-app.staticwebassets.runtime.json"));
+                "NutrientMap.Api.staticwebassets.runtime.json"));
 
             if (!File.Exists(manifestPath))
             {

@@ -1,4 +1,4 @@
-namespace nutrition_blazor_app.Contracts;
+namespace NutrientMap.Domain.Contracts;
 
 public sealed class NutritionDashboardDto
 {
