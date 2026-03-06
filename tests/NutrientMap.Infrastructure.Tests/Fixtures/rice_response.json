@@ -1,0 +1,19 @@
+[
+  {
+    "fdcId": 2512381,
+    "description": "Rice, white, long grain, unenriched, raw",
+    "dataType": "Foundation",
+    "publicationDate": "2023-04-20",
+    "ndbNumber": "20444",
+    "foodNutrients": [
+      {
+        "number": "204",
+        "name": "Total lipid (fat)",
+        "amount": 1.03,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      }
+    ]
+  }
+]

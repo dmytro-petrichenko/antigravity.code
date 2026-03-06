@@ -1,9 +1,13 @@
 @apiKey = 6AWaRCviOJLOGw9BWfd7q478ViWdNXoAh4knRup5
 @baseUrl = https://api.nal.usda.gov/fdc/v1
-@foodName = sunflower
-# 2512381 rice white id
-# 1750349
-
+@foodName = Salmon
+# 2512381 rice white id . 
+# 1750349 sunflower oil
+# 2512378 Buckwheat
+# 2646170 Chicken, breast, boneless, skinless, raw
+# 2710823 Asparagus, green, raw
+# Brocoli legacy 170379, Brocoli Foundation 747447
+# 2684441 Fish, salmon, Atlantic, farm raised, raw
 ###
 
 ### Get Multiple Foods by FDC IDs (POST)
@@ -17,28 +21,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "fdcIds": [2512381],
-  "format": "full"  
-}
-
-###
-
-### Get Food List (POST)
-# Retrieves a paged list of foods using a POST request, specifically filtering for Foundation foods.
-# Query param "api_key": string
-# "dataType": ["Branded", "Foundation", "Survey (FNDDS)", "SR Legacy"]
-# "pageSize": 1-200
-# "pageNumber": integer
-# "sortBy": "dataType.keyword", "lowercaseDescription.keyword", "fdcId", "publishedDate"
-# "sortOrder": "asc", "desc"
-POST {{baseUrl}}/foods/list?api_key={{apiKey}}
-Content-Type: application/json
-Accept: application/json
-
-{
-  "dataType": ["Foundation"],
-  "pageSize": 5,
-  "pageNumber": 1
+  "fdcIds": [2512378],
+  "format": "abridged"  
 }
 
 ###
@@ -68,3 +52,7 @@ Accept: application/json
   "sortBy": "dataType.keyword",
   "sortOrder": "asc"
 }
+
+###
+
+GET {{baseUrl}}/food/{{fdcId}}?api_key={{apiKey}}&format=abridged&nutrients=204&nutrients=606

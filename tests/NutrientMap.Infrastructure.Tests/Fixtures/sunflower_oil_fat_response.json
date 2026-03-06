@@ -1,0 +1,67 @@
+[
+  {
+    "fdcId": 1750349,
+    "description": "Oil, sunflower",
+    "dataType": "Foundation",
+    "publicationDate": "2021-04-28",
+    "ndbNumber": "100262",
+    "foodNutrients": [
+      {
+        "number": "298",
+        "name": "Total fat (NLEA)",
+        "amount": 93.2,
+        "unitName": "G",
+        "derivationCode": "AS",
+        "derivationDescription": "Summed"
+      },
+      {
+        "number": "606",
+        "name": "Fatty acids, total saturated",
+        "amount": 8.99,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "645",
+        "name": "Fatty acids, total monounsaturated",
+        "amount": 63.4,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "646",
+        "name": "Fatty acids, total polyunsaturated",
+        "amount": 20.7,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "605",
+        "name": "Fatty acids, total trans",
+        "amount": 0.116,
+        "unitName": "G",
+        "derivationCode": "A",
+        "derivationDescription": "Analytical"
+      },
+      {
+        "number": "693",
+        "name": "Fatty acids, total trans-monoenoic",
+        "amount": 0.0349,
+        "unitName": "G",
+        "derivationCode": "AS",
+        "derivationDescription": "Summed"
+      },
+      {
+        "number": "695",
+        "name": "Fatty acids, total trans-polyenoic",
+        "amount": 0,
+        "unitName": "G",
+        "derivationCode": "AS",
+        "derivationDescription": "Summed"
+      }
+    ]
+  }
+]
