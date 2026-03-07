@@ -1,0 +1,111 @@
+<section class="panel ds-card waffle-diagram-panel" aria-label="Waffle diagram panel">
+    <div class="waffle-diagram">
+        <div class="waffle-grid" role="img" aria-label="@BuildAriaLabel()">
+            @foreach (var cell in _cells)
+            {
+                <span class="@BuildCellClass(cell)" aria-hidden="true" style="@BuildColorStyle(cell.Color)"></span>
+            }
+        </div>
+
+        <ul class="waffle-legend ds-list-reset">
+            @foreach (var segment in Segments)
+            {
+                <li class="waffle-legend-item ds-legend-item ds-text-label">
+                    <span class="@BuildLegendSwatchClass(segment)" aria-hidden="true" style="@BuildColorStyle(segment.Color)"></span>
+                    <span>@segment.Label</span>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public IReadOnlyList<WaffleDiagramSegmentDto> Segments { get; set; } = [];
+
+    private IReadOnlyList<WaffleCell> _cells = [];
+
+    protected override void OnParametersSet()
+    {
+        ValidateSegments();
+        _cells = BuildCells();
+    }
+
+    private void ValidateSegments()
+    {
+        if (Segments.Count == 0)
+        {
+            throw new InvalidOperationException("Waffle diagram requires at least one segment.");
+        }
+
+        foreach (var segment in Segments)
+        {
+            if (segment.CellCount < 0)
+            {
+                throw new InvalidOperationException(
+                    $"Waffle diagram cell counts cannot be negative. '{segment.Label}' was {segment.CellCount}.");
+            }
+
+            if (string.IsNullOrWhiteSpace(segment.Color))
+            {
+                throw new InvalidOperationException("Waffle diagram requires a color for every segment.");
+            }
+
+            if (string.IsNullOrWhiteSpace(segment.Label))
+            {
+                throw new InvalidOperationException("Waffle diagram requires a label for every segment.");
+            }
+        }
+
+        var totalCells = Segments.Sum(segment => segment.CellCount);
+
+        if (totalCells != 100)
+        {
+            throw new InvalidOperationException($"Waffle diagram requires exactly 100 cells but received {totalCells}.");
+        }
+    }
+
+    private IReadOnlyList<WaffleCell> BuildCells()
+    {
+        var cells = new List<WaffleCell>(100);
+
+        foreach (var segment in Segments)
+        {
+            var requiresContrast = NeedsContrastBorder(segment.Color);
+
+            for (var index = 0; index < segment.CellCount; index++)
+            {
+                cells.Add(new WaffleCell(segment.Color, requiresContrast));
+            }
+        }
+
+        return cells;
+    }
+
+    private string BuildAriaLabel()
+    {
+        var parts = Segments.Select(segment => $"{segment.Label} {segment.CellCount} cells");
+        return $"Waffle diagram: {string.Join(", ", parts)}";
+    }
+
+    private static string BuildColorStyle(string color) => $"background: {color};";
+
+    private static string BuildCellClass(WaffleCell cell)
+        => cell.RequiresContrast ? "waffle-cell waffle-cell-contrast" : "waffle-cell";
+
+    private static string BuildLegendSwatchClass(WaffleDiagramSegmentDto segment)
+        => NeedsContrastBorder(segment.Color)
+            ? "waffle-legend-swatch ds-swatch waffle-legend-swatch-contrast"
+            : "waffle-legend-swatch ds-swatch";
+
+    private static bool NeedsContrastBorder(string color)
+    {
+        var normalized = color.Trim();
+
+        return string.Equals(normalized, "#FFFFFF", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(normalized, "#FFF", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(normalized, "white", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private readonly record struct WaffleCell(string Color, bool RequiresContrast);
+}

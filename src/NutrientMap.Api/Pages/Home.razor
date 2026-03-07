@@ -6,6 +6,8 @@
 <main class="dashboard" aria-label="Nutrition dashboard">
     <h1 class="sr-only">Nutrition dashboard</h1>
 
+    <WaffleDiagramWidget Segments="@TestWaffleSegments" />
+
     <NutritionFactsTestWidget ProductName="@ResolvedDashboard.Title" Calories="@ResolvedDashboard.Energy.Calories" />
 
     <section class="panel ds-card nutrition-panel" aria-label="Macronutrients">
@@ -30,6 +32,14 @@
 @code {
     [Parameter]
     public NutritionDashboardDto? Dashboard { get; set; }
+
+    private static readonly IReadOnlyList<WaffleDiagramSegmentDto> TestWaffleSegments =
+    [
+        new() { CellCount = 33, Color = "#FF0000", Label = "Saturated" },
+        new() { CellCount = 34, Color = "#FFBF00", Label = "Monounsaturated" },
+        new() { CellCount = 20, Color = "#FF7F50", Label = "Polyunsaturated" },
+        new() { CellCount = 13, Color = "#FFC107", Label = "Trans" }
+    ];
 
     private NutritionDashboardDto ResolvedDashboard { get; set; } = new();
 

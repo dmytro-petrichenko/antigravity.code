@@ -10,6 +10,7 @@
     display: none;
 }
 
+.dashboard > ::deep section.waffle-diagram-panel,
 .dashboard > ::deep section.nutrition-facts-test-panel {
     grid-column: 1 / -1;
 }
@@ -54,6 +55,7 @@
 }
 
 @container ratio-frame (max-width: 40rem) {
+    .dashboard > ::deep section.waffle-diagram-panel,
     .nutrition-panel,
     .macronutrient-pie-panel {
         padding: var(--panel-padding-mobile);

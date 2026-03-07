@@ -98,15 +98,18 @@ public sealed class HomePageBrowserStructureTests
         Assert.Equal("grid", await dashboard.EvaluateAsync<string>("el => getComputedStyle(el).display"));
 
         var children = page.Locator("main.dashboard > *");
-        Assert.Equal(6, await children.CountAsync());
+        Assert.Equal(7, await children.CountAsync());
 
         Assert.True(await children.Nth(0).EvaluateAsync<bool>("el => el.matches('h1.sr-only')"));
-        Assert.True(await children.Nth(1).EvaluateAsync<bool>("el => el.matches('section.nutrition-facts-test-panel')"));
-        Assert.True(await children.Nth(2).EvaluateAsync<bool>("el => el.matches('section.nutrition-panel')"));
-        Assert.True(await children.Nth(3).EvaluateAsync<bool>("el => el.matches('section.macronutrient-pie-panel')"));
-        Assert.True(await children.Nth(4).EvaluateAsync<bool>("el => el.matches('div.dashboard-divider')"));
-        Assert.True(await children.Nth(5).EvaluateAsync<bool>("el => el.matches('div.micronutrient-row')"));
+        Assert.True(await children.Nth(1).EvaluateAsync<bool>("el => el.matches('section.waffle-diagram-panel')"));
+        Assert.True(await children.Nth(2).EvaluateAsync<bool>("el => el.matches('section.nutrition-facts-test-panel')"));
+        Assert.True(await children.Nth(3).EvaluateAsync<bool>("el => el.matches('section.nutrition-panel')"));
+        Assert.True(await children.Nth(4).EvaluateAsync<bool>("el => el.matches('section.macronutrient-pie-panel')"));
+        Assert.True(await children.Nth(5).EvaluateAsync<bool>("el => el.matches('div.dashboard-divider')"));
+        Assert.True(await children.Nth(6).EvaluateAsync<bool>("el => el.matches('div.micronutrient-row')"));
 
+        Assert.Equal(1, await page.Locator("section.waffle-diagram-panel div.waffle-grid").CountAsync());
+        Assert.Equal(100, await page.Locator("section.waffle-diagram-panel span.waffle-cell").CountAsync());
         Assert.Equal("Nutrition Facts", (await page.Locator("section.nutrition-facts-test-panel h2.nutrition-facts-title").TextContentAsync())?.Trim());
         Assert.Equal(4, await page.Locator(".nutrition-facts-test-panel .nutrition-fact-item").CountAsync());
         Assert.Equal(3, await page.Locator("section.nutrition-panel article.macro-widget").CountAsync());
@@ -121,6 +124,65 @@ public sealed class HomePageBrowserStructureTests
         Assert.NotNull(donutChartBounds);
         Assert.True(donutChartBounds!.Width > 100);
         Assert.True(donutChartBounds.Height > 100);
+    }
+
+    [Fact]
+    public async Task HomePage_WaffleCellsKeepFixedSizeWhenViewportNarrows()
+    {
+        await using var host = await HomePageKestrelHost.StartAsync();
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        await using var context = await browser.NewContextAsync(new BrowserNewContextOptions
+        {
+            ViewportSize = new ViewportSize
+            {
+                Width = 1440,
+                Height = 900
+            }
+        });
+
+        var page = await context.NewPageAsync();
+        await page.GotoAsync($"{host.BaseUrl}/home", new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.DOMContentLoaded
+        });
+
+        await page.WaitForSelectorAsync("section.waffle-diagram-panel span.waffle-cell", new PageWaitForSelectorOptions
+        {
+            Timeout = 15_000
+        });
+
+        // Remove the shell's minimum-width guard so the test can verify the widget
+        // keeps its own fixed geometry when the available parent width becomes narrow.
+        await page.EvaluateAsync("""
+            () => {
+                document.querySelector('.ratio-viewport-frame')?.setAttribute('style', '--ratio-frame-min:0.5;--ratio-frame-max:0.707;--ratio-content-min-width:0px;');
+                document.querySelector('.ratio-viewport-frame__content')?.setAttribute('style', 'min-width: 0;');
+                document.querySelector('.app-frame')?.setAttribute('style', 'min-width: 0;');
+            }
+            """);
+
+        var wafflePanel = page.Locator("section.waffle-diagram-panel");
+        var firstCell = page.Locator("section.waffle-diagram-panel span.waffle-cell").Nth(0);
+
+        var initialCellWidth = await firstCell.EvaluateAsync<double>("el => el.getBoundingClientRect().width");
+        var initialCellHeight = await firstCell.EvaluateAsync<double>("el => el.getBoundingClientRect().height");
+
+        await page.SetViewportSizeAsync(320, 900);
+
+        await page.WaitForTimeoutAsync(100);
+
+        var narrowCellWidth = await firstCell.EvaluateAsync<double>("el => el.getBoundingClientRect().width");
+        var narrowCellHeight = await firstCell.EvaluateAsync<double>("el => el.getBoundingClientRect().height");
+        var overflowX = await wafflePanel.EvaluateAsync<string>("el => getComputedStyle(el).overflowX");
+
+        Assert.InRange(narrowCellWidth, initialCellWidth - 0.5, initialCellWidth + 0.5);
+        Assert.InRange(narrowCellHeight, initialCellHeight - 0.5, initialCellHeight + 0.5);
+        Assert.Equal("visible", overflowX);
     }
 
     [Fact]
